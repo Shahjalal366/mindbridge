@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en" style="height:100%">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindBridge - Youth Mental Health Support</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="styles/styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar" aria-label="Main navigation">
+        <div class="nav-inner">
+
+            <a href="index.html" class="nav-logo" aria-label="MindBridge Home">MindBridge</a>
+
+            <!-- The default navigation items on large screens -->
+            <div class="nav-left" role="menubar">
+                <a href="index.html" role="menuitem">Home</a>
+                <a href="self-assessment.html" role="menuitem">Self-Assessment</a>
+                <a href="resource-library.html" role="menuitem">Resource Library</a>
+                <a href="mood-tracker.html" role="menuitem">Mood Tracker</a>
+                <a href="find-support.html" role="menuitem">Find Support</a> <a href="community-forum.html"
+                    role="menuitem">Community Forum</a>
+            </div>
+
+            <div class="nav-right">
+                <span class="nav-divider" aria-hidden="true"></span>
+                <a href="register.html" class="register">Register</a>
+                <a href="login.html" class="login-btn">Log In</a>
+            </div>
+
+            <!-- The hamburger menu is hidden by default and only displayed on smaller screens -->
+            <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false"
+                onclick="toggleMobileMenu()">
+                <span class="menu-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
+                        <path d="M4 7h16" />
+                        <path d="M4 12h16" />
+                        <path d="M4 17h16" />
+                    </svg>
+                </span>
+            </button>
+
+        </div>
+    </nav>
+
+    <!-- After the media query shows the hamburger menu, the onclick function
+handles the opening and closing of the navbar -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+        <div class="mobile-menu-header">
+            <span class="mobile-menu-logo">MindBridge</span>
+            <button class="mobile-close" aria-label="Close menu" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round">
+                    <path d="M6 6l12 12" />
+                    <path d="M18 6L6 18" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Items -->
+        <div style="flex-grow:1;overflow-y:auto">
+            <a href="index.html" class="mobile-link">Home</a>
+            <a href="self-assessment.html" class="mobile-link">Self-Assessment</a>
+            <a href="resource-library.html" class="mobile-link">Resource Library</a>
+            <a href="mood-tracker.html" class="mobile-link">Mood Tracker</a>
+            <a href="find-support.html" class="mobile-link">Find Support</a> <a href="community-forum.html"
+                class="mobile-link">Community Forum</a>
+        </div>
+
+        <div class="mobile-actions">
+            <a href="register.html" class="register-mobile">Register</a>
+            <a href="login.html" class="btn-primary" style="text-align:center;justify-content:center">Log In</a>
+        </div>
+    </div>
+
+    <main class="forum-main">
+        <section class="forum-shell" aria-labelledby="forum-title">
+
+            <div class="forum-hero">
+                <div>
+                    <br><br>
+                    <span class="forum-kicker">Safe Community Space</span>
+                    <h1 id="forum-title" class="forum-title">Community Forum</h1>
+                    <p class="forum-subtitle">
+                        Share your thoughts, ask questions, and support others in a safe and respectful space.
+                    </p>
+                </div>
+
+                <div class="forum-stats">
+                    <div>
+                        <strong>1.2k+</strong>
+                        <span>Members</span>
+                    </div>
+                    <div>
+                        <strong>320+</strong>
+                        <span>Posts</span>
+                    </div>
+                    <div>
+                        <strong>24/7</strong>
+                        <span>Support</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="forum-layout">
+
+                <div class="forum-main-column">
+
+                    <div class="forum-composer">
+                        <h2>Create a New Post</h2>
+
+                        <div class="forum-composer-row">
+                            <div class="forum-post-field">
+                                <i data-lucide="edit-3" aria-hidden="true"></i>
+                                <textarea id="forumPostInput" aria-label="Create a forum post"
+                                    placeholder="Share your thoughts..."></textarea>
+                            </div>
+
+                            <button class="forum-post-btn" type="button" onclick="createForumPost()">
+                                <i data-lucide="send" aria-hidden="true"></i>
+                                <span>Post</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <section class="forum-posts" id="forumPosts" aria-label="Forum posts">
+                        <article class="forum-post">
+                            <div class="forum-post-image">
+                                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=520&q=80"
+                                    alt="Student notebook and laptop on a desk">
+                            </div>
+
+                            <div class="forum-post-content">
+                                <span class="post-category">Academic Stress</span>
+                                <h2>How do you deal with exam stress?</h2>
+                                <p>I have exams coming soon and I feel overwhelmed. What helps you calm down?</p>
+                                <span>12 comments · 2 hours ago</span>
+                            </div>
+
+                            <button class="forum-view-btn" type="button">
+                                <span>View</span>
+                                <i data-lucide="arrow-right" aria-hidden="true"></i>
+                            </button>
+                        </article>
+
+                        <article class="forum-post">
+                            <div class="forum-post-image">
+                                <img src="https://images.unsplash.com/photo-1493836512294-502baa1986e2?auto=format&fit=crop&w=520&q=80"
+                                    alt="Person resting with a cup during a difficult day">
+                            </div>
+
+                            <div class="forum-post-content">
+                                <span class="post-category">General Support</span>
+                                <h2>Feeling overwhelmed lately</h2>
+                                <p>Some days feel heavier than others. I just want to know I’m not alone.</p>
+                                <span>8 comments · 5 hours ago</span>
+                            </div>
+
+                            <button class="forum-view-btn" type="button">
+                                <span>View</span>
+                                <i data-lucide="arrow-right" aria-hidden="true"></i>
+                            </button>
+                        </article>
+
+                        <article class="forum-post">
+                            <div class="forum-post-image">
+                                <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=520&q=80"
+                                    alt="Peaceful self-care and meditation setting">
+                            </div>
+
+                            <div class="forum-post-content">
+                                <span class="post-category">Self-care</span>
+                                <h2>Tips for better self-care</h2>
+                                <p>What are your small self-care habits that actually make a difference?</p>
+                                <span>15 comments · 1 day ago</span>
+                            </div>
+
+                            <button class="forum-view-btn" type="button">
+                                <span>View</span>
+                                <i data-lucide="arrow-right" aria-hidden="true"></i>
+                            </button>
+                        </article>
+
+                    </section>
+
+                </div>
+
+                <aside class="forum-sidebar">
+
+                    <section class="forum-side-card">
+                        <h2>Categories</h2>
+
+                        <div class="forum-category-grid">
+                            <button class="forum-category-btn is-active" type="button">Anxiety</button>
+                            <button class="forum-category-btn" type="button">Academic Stress</button>
+                            <button class="forum-category-btn" type="button">Relationships</button>
+                            <button class="forum-category-btn" type="button">Stress</button>
+                            <button class="forum-category-btn" type="button">General Support</button>
+                            <button class="forum-category-btn" type="button">Self-care</button>
+                        </div>
+                    </section>
+
+                    <section class="forum-side-card forum-guidelines">
+                        <h2>Community Guidelines</h2>
+                        <p>Be respectful, supportive, and kind. No bullying, harassment, or harmful advice.</p>
+                    </section>
+
+                    <section class="forum-side-card">
+                        <h2>Popular Topics</h2>
+
+                        <ul class="popular-list">
+                            <li>Managing university pressure</li>
+                            <li>Building confidence</li>
+                            <li>Friendship conflicts</li>
+                            <li>Sleep and routine</li>
+                        </ul>
+                    </section>
+
+                    <section class="forum-side-card crisis-mini-card">
+                        <h2>Need urgent help?</h2>
+                        <p>If you feel unsafe, reach out for immediate support.</p>
+                        <a href="crisis.html">Get Help Now</a>
+                    </section>
+
+                </aside>
+
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+                <span class="logo">MindBridge</span>
+                <p>Our vision is to provide convenience and help increase your sales business.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24">
+                            <!-- Commands for drawing the Facebook icon -->
+                            <!-- Similarly for all other icons-->
+                            <path
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>About</h4>
+                <a href="#">How it works</a>
+                <a href="#">Featured</a>
+                <a href="#">Partnership</a>
+                <a href="#">Business Relation</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Community</h4>
+                <a href="#">Events</a>
+                <a href="#">Blog</a>
+                <a href="#">Podcast</a>
+                <a href="#">Invite a friend</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Socials</h4>
+                <a href="#">Discord</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+                <a href="#">Facebook</a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>©2026 MindBridge. All rights reserved.</span>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy &amp; Policy</a>
+                <a href="#">Terms &amp; Condition</a>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="js/scripts.js"></script>
+    <script type="text/javascript" src="js/forum.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Character encoding -->
+    <meta charset="UTF-8">
+
+    <!-- Responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title -->
+    <title>Mood Tracker – MindBridge</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Main website stylesheet -->
+    <link href="styles/styles.css" rel="stylesheet">
+
+    <!-- Mood Tracker stylesheet -->
+    <link href="styles/mood-tracker.css" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+</head>
+
+<body>
+
+    <!-- =========================
+         Navigation Bar
+    ========================== -->
+    <nav class="navbar" id="navbar" aria-label="Main navigation">
+
+        <div class="nav-inner">
+
+            <!-- Website Logo -->
+            <a href="index.html" class="nav-logo">MindBridge</a>
+
+            <!-- Desktop Navigation -->
+            <div class="nav-left" role="menubar">
+
+                <a href="index.html">Home</a>
+
+                <a href="self-assessment.html">
+                    Self-Assessment
+                </a>
+
+                <a href="resource-library.html">
+                    Resource Library
+                </a>
+
+                <a href="mood-tracker.html">
+                    Mood Tracker
+                </a>
+
+                <a href="find-support.html">
+                    Find Support
+                </a>
+
+                <a href="community-forum.html">
+                    Community Forum
+                </a>
+
+            </div>
+
+            <!-- Login/Register Buttons -->
+            <div class="nav-right">
+
+                <span class="nav-divider"></span>
+
+                <a href="register.html" class="register" id="navRegister">
+                    Register
+                </a>
+
+                <a href="login.html" class="login-btn" id="navLogin">
+                    Log In
+                </a>
+
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false"
+                onclick="toggleMobileMenu()">
+
+                <span class="menu-icon">
+
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
+
+                        <path d="M4 7h16" />
+                        <path d="M4 12h16" />
+                        <path d="M4 17h16" />
+
+                    </svg>
+
+                </span>
+
+            </button>
+
+        </div>
+
+    </nav>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()">
+    </div>
+
+    <!-- =========================
+         Mobile Navigation
+    ========================== -->
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+
+        <!-- Mobile Header -->
+        <div class="mobile-menu-header">
+
+            <span class="mobile-menu-logo">
+                MindBridge
+            </span>
+
+            <button class="mobile-close" onclick="closeMobileMenu()">
+
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round">
+
+                    <path d="M6 6l12 12" />
+                    <path d="M18 6L6 18" />
+
+                </svg>
+
+            </button>
+
+        </div>
+
+        <!-- Mobile Links -->
+        <div style="flex-grow:1; overflow-y:auto;">
+
+            <a href="index.html" class="mobile-link">
+                Home
+            </a>
+
+            <a href="self-assessment.html" class="mobile-link">
+                Self-Assessment
+            </a>
+
+            <a href="resource-library.html" class="mobile-link">
+                Resource Library
+            </a>
+
+            <a href="mood-tracker.html" class="mobile-link">
+                Mood Tracker
+            </a>
+
+            <a href="find-support.html" class="mobile-link">
+                Find Support
+            </a>
+
+            <a href="community-forum.html" class="mobile-link">
+                Community Forum
+            </a>
+
+        </div>
+
+        <!-- Mobile Buttons -->
+        <div class="mobile-actions">
+
+            <a href="register.html" class="register-mobile">
+                Register
+            </a>
+
+            <a href="login.html" class="btn-primary" style="text-align:center;justify-content:center;">
+                Log In
+            </a>
+
+        </div>
+
+    </div>
+    <!-- =========================
+         Mood Tracker Page
+    ========================== -->
+    <main class="tracker-page">
+
+        <div class="tracker-container">
+
+            <!-- Page Header -->
+            <div class="tracker-header">
+
+                <div>
+                    <br><br>
+                    <h1>
+                        Mood Tracker
+                    </h1>
+
+                    <p>
+                        Log how you're feeling and track your emotional patterns over time.
+                    </p>
+
+                </div>
+
+            </div>
+            <!-- =========================================
+                 Mood Logging Card
+            ========================================== -->
+            <div class="tracker-layout">
+                <div class="tracker-main">
+                    <div class="log-card" id="logCard">
+
+                        <h2>How are you feeling today?</h2>
+
+                        <!-- Mood Selection Buttons -->
+                        <div class="mood-row" id="moodRow">
+
+                            <button class="mood-btn" data-mood="Amazing" data-score="5" onclick="selectMood(this)">
+
+                                <span class="emoji">😄</span>
+                                <span class="mood-name">Amazing</span>
+
+                            </button>
+
+                            <button class="mood-btn" data-mood="Good" data-score="4" onclick="selectMood(this)">
+
+                                <span class="emoji">🙂</span>
+                                <span class="mood-name">Good</span>
+
+                            </button>
+
+                            <button class="mood-btn" data-mood="Okay" data-score="3" onclick="selectMood(this)">
+
+                                <span class="emoji">😐</span>
+                                <span class="mood-name">Okay</span>
+
+                            </button>
+
+                            <button class="mood-btn" data-mood="Low" data-score="2" onclick="selectMood(this)">
+
+                                <span class="emoji">😔</span>
+                                <span class="mood-name">Low</span>
+
+                            </button>
+
+                            <button class="mood-btn" data-mood="Rough" data-score="1" onclick="selectMood(this)">
+
+                                <span class="emoji">😞</span>
+                                <span class="mood-name">Rough</span>
+
+                            </button>
+
+                        </div>
+
+                        <!-- Mood Note -->
+                        <label class="note-label" for="noteInput">
+                            Add a note (optional)
+                        </label>
+
+                        <textarea class="note-input" id="noteInput"
+                            placeholder="What's on your mind? What happened today?"></textarea>
+
+                        <!-- Bottom Section -->
+                        <div class="log-foot">
+
+                            <!-- Date Picker -->
+                            <input type="date" class="date-input" id="logDate">
+
+                            <div style="display:flex;align-items:center;gap:14px;">
+
+                                <!-- Save Message -->
+                                <span class="log-toast" id="logToast">
+
+                                    ✅ Mood saved!
+
+                                </span>
+
+                                <!-- Save Button -->
+                                <button class="btn-log" onclick="saveEntry()">
+
+                                    Save Entry
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- =========================================
+                 Mood Chart
+            ========================================== -->
+
+                    <div class="chart-card" id="chartCard">
+
+                        <h2>
+                            Last 7 Days
+                        </h2>
+
+                        <div class="chart-wrap">
+
+                            <canvas id="moodChart"></canvas>
+
+                        </div>
+
+                    </div>
+
+                    <!-- =========================================
+                 Mood History
+            ========================================== -->
+
+                    <div class="history-card" id="historyCard">
+
+                        <h2>
+                            Your Mood Log
+                        </h2>
+
+                        <div class="log-entries" id="logEntries">
+                        </div>
+
+                    </div>
+
+                </div> <!-- tracker-main -->
+
+                <aside class="tracker-sidebar">
+
+                    <div class="mood-side-card">
+                        <h3>🌿 Mood Summary</h3>
+                        <p>Track your emotional pattern and notice what affects your day.</p>
+
+                        <div class="summary-box">
+                            <span>Today’s Mood</span>
+                            <strong id="todayMoodText">Not logged yet</strong>
+                        </div>
+
+                        <div class="summary-box">
+                            <span>Entries Saved</span>
+                            <strong id="entryCountText">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="mood-side-card tips-card">
+                        <h3>💙 Gentle Reminder</h3>
+                        <ul>
+                            <li>Take a short walk</li>
+                            <li>Drink enough water</li>
+                            <li>Write down one good thing</li>
+                            <li>Talk to someone you trust</li>
+                        </ul>
+                    </div>
+
+                    <div class="mood-side-card">
+                        <h3>✨ Mood Guide</h3>
+                        <p><strong>😄 Amazing:</strong> Very positive</p>
+                        <p><strong>🙂 Good:</strong> Stable and okay</p>
+                        <p><strong>😐 Okay:</strong> Neutral mood</p>
+                        <p><strong>😔 Low:</strong> Tired or sad</p>
+                        <p><strong>😞 Rough:</strong> Difficult day</p>
+                    </div>
+
+                </aside>
+            </div>
+
+        </div>
+
+        </div>
+
+    </main>
+    <!-- =========================
+         Footer
+    ========================== -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-grid">
+
+            <!-- Footer Brand -->
+            <div class="footer-brand">
+                <span class="logo">MindBridge</span>
+
+                <p>
+                    Our vision is to provide convenience and help increase your mental well-being.
+                </p>
+
+                <!-- Social Media Icons -->
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                    </a>
+
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer Links -->
+            <div class="footer-col">
+                <h4>About</h4>
+                <a href="#">How it works</a>
+                <a href="#">Featured</a>
+                <a href="#">Partnership</a>
+                <a href="#">Business Relation</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Community</h4>
+                <a href="#">Events</a>
+                <a href="#">Blog</a>
+                <a href="#">Podcast</a>
+                <a href="#">Invite a friend</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Socials</h4>
+                <a href="#">Discord</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+                <a href="#">Facebook</a>
+            </div>
+
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <span>©2026 MindBridge. All rights reserved.</span>
+
+            <div class="footer-bottom-links">
+                <a href="#">Privacy &amp; Policy</a>
+                <a href="#">Terms &amp; Condition</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Main JavaScript File -->
+    <script src="js/scripts.js"></script>
+
+    <!-- Mood Tracker JavaScript File -->
+    <script src="js/mood-tracker.js"></script>
+
+</body>
+
+</html>

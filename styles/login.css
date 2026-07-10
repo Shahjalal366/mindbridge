@@ -1,0 +1,191 @@
+/* =====================================================
+   Login Page Styles
+   This file controls the layout and design for login.html.
+===================================================== */
+
+
+/* ---------- Page Background ---------- */
+
+.auth-body {
+    min-height: 100%;
+    background: linear-gradient(135deg, #F8FBFD 0%, #EAF2F8 100%);
+}
+
+
+/* ---------- Main Layout ---------- */
+
+.auth-main {
+    min-height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 20px;
+}
+
+
+/* ---------- Login Card ---------- */
+
+.auth-card {
+    width: min(100%, 520px);
+    min-height: 640px;
+    border-radius: 34px;
+    background: #ffffff;
+    border: 1px solid rgba(15, 76, 129, 0.08);
+    box-shadow: 0 20px 42px rgba(15, 23, 42, 0.18);
+    padding: 46px 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ---------- Brand ---------- */
+
+.auth-brand {
+    align-self: flex-start;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 130%;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.auth-brand:hover {
+    color: var(--primary-dark);
+}
+
+
+/* ---------- Typography ---------- */
+
+.auth-card h1 {
+    font-size: 31px;
+    font-weight: 800;
+    line-height: 118%;
+    color: #111827;
+    margin-bottom: 82px;
+    white-space: nowrap;
+}
+
+.auth-intro {
+    margin-bottom: 18px;
+}
+
+.auth-intro h2 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 130%;
+    color: #303030;
+    margin-bottom: 14px;
+}
+
+.auth-intro p {
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 150%;
+}
+
+
+/* ---------- Form ---------- */
+
+.auth-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ---------- Input Fields ---------- */
+
+.auth-field {
+    height: 50px;
+    border: 1px solid rgba(15, 23, 42, 0.16);
+    border-radius: 999px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 18px;
+    margin-bottom: 18px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.auth-field:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(15, 76, 129, 0.10);
+    transform: translateY(-1px);
+}
+
+.auth-field svg {
+    width: 18px;
+    height: 18px;
+    color: #9ca3af;
+    flex-shrink: 0;
+}
+
+.auth-field input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #111827;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 150%;
+}
+
+.auth-field input::placeholder {
+    color: #a8b0ba;
+}
+
+
+/* ---------- Submit Button ---------- */
+
+.auth-submit {
+    height: 50px;
+    border-radius: 999px;
+    background: #147DE8;
+    color: #ffffff;
+    font-weight: 800;
+    margin-top: 6px;
+    box-shadow: 0 14px 24px rgba(20, 125, 232, 0.22);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-submit:hover {
+    background: #0F68C5;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 30px rgba(20, 125, 232, 0.30);
+}
+
+
+/* ---------- Forgot Password ---------- */
+
+.auth-forgot {
+    align-self: flex-start;
+    color: #4b5563;
+    font-size: 13px;
+    line-height: 150%;
+    margin-top: 18px;
+}
+
+.auth-forgot:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 540px) {
+    .auth-card {
+        padding: 36px 28px;
+        min-height: auto;
+    }
+
+    .auth-card h1 {
+        font-size: 26px;
+        margin-bottom: 52px;
+        white-space: normal;
+    }
+}

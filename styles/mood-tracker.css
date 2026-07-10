@@ -1,0 +1,366 @@
+/* =========================================================
+   Mood Tracker Page Styles
+   ========================================================= */
+
+.tracker-page {
+    min-height: calc(100vh - 72px);
+    background: var(--sand);
+    padding: 52px 24px 80px;
+}
+
+.tracker-container {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Header */
+.tracker-header {
+    margin-bottom: 32px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tracker-header h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--charcoal);
+    margin-bottom: 6px;
+}
+
+.tracker-header p {
+    font-size: 1.15rem;
+    color: #6b7280;
+}
+
+/* Layout */
+.tracker-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) 360px;
+    gap: 36px;
+    align-items: start;
+}
+
+.tracker-main {
+    min-width: 0;
+}
+
+/* Cards */
+.log-card,
+.chart-card,
+.history-card {
+    background: var(--surface);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    padding: 42px;
+    margin-bottom: 28px;
+}
+
+.log-card h2,
+.chart-card h2,
+.history-card h2 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--charcoal);
+    margin-bottom: 22px;
+}
+
+/* Mood buttons */
+.mood-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 26px;
+}
+
+.mood-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 22px 18px;
+    border-radius: 18px;
+    border: 2px solid #e5e7eb;
+    background: var(--surface);
+    cursor: pointer;
+    transition: all .2s;
+    flex: 1;
+    min-width: 100px;
+}
+
+.mood-btn:hover {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.mood-btn.selected {
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+.mood-btn .emoji {
+    font-size: 2.4rem;
+    line-height: 1;
+}
+
+.mood-btn .mood-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #374151;
+    white-space: nowrap;
+}
+
+.mood-btn.selected .mood-name {
+    color: var(--primary);
+}
+
+/* Note */
+.note-label {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #374151;
+    font-family: 'Manrope', sans-serif;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.note-input {
+    width: 100%;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 16px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.05rem;
+    color: var(--charcoal);
+    resize: vertical;
+    min-height: 110px;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.note-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.log-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 18px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.date-input {
+    padding: 11px 14px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    color: var(--charcoal);
+    outline: none;
+}
+
+.btn-log {
+    padding: 13px 30px;
+    border-radius: 12px;
+    background: var(--primary);
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-log:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.log-toast {
+    font-size: 0.9rem;
+    color: #16a34a;
+    font-weight: 700;
+    display: none;
+}
+
+.log-toast.show {
+    display: block;
+}
+
+/* Chart */
+.chart-wrap {
+    position: relative;
+    height: 280px;
+}
+
+canvas#moodChart {
+    width: 100% !important;
+}
+
+/* History */
+.log-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.log-entry {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid #f3f4f6;
+    background: #fafafa;
+}
+
+.entry-emoji {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.entry-body {
+    flex: 1;
+}
+
+.entry-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 3px;
+    flex-wrap: wrap;
+}
+
+.entry-mood {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--charcoal);
+}
+
+.entry-date {
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+.entry-note {
+    font-size: 0.95rem;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.entry-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #d1d5db;
+    padding: 2px;
+    flex-shrink: 0;
+}
+
+.entry-delete:hover {
+    color: #ef4444;
+}
+
+.empty-msg {
+    text-align: center;
+    padding: 40px;
+    color: #9ca3af;
+    font-size: 0.95rem;
+}
+
+/* Sidebar */
+.tracker-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mood-side-card {
+    background: linear-gradient(135deg, #ffffff 0%, #eef6ff 100%);
+    border-radius: 22px;
+    padding: 26px 24px;
+    box-shadow: 0 16px 35px rgba(15, 76, 129, 0.08);
+    border: 1px solid rgba(15, 76, 129, 0.08);
+}
+
+.mood-side-card h3 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--charcoal);
+    margin-bottom: 10px;
+}
+
+.mood-side-card p,
+.mood-side-card li {
+    font-size: 0.95rem;
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+.summary-box {
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 14px;
+    padding: 16px;
+    margin-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-box span {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.summary-box strong {
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+.tips-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+}
+
+.tips-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tips-card li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(15, 76, 129, 0.06);
+}
+
+.tips-card li::before {
+    content: "✓";
+    color: #16a34a;
+    font-weight: 800;
+    margin-right: 8px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .tracker-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .log-card,
+    .chart-card,
+    .history-card {
+        padding: 30px;
+    }
+
+    .tracker-header h1 {
+        font-size: 2.2rem;
+    }
+}

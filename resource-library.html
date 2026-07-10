@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en" style="height:100%">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Library – MindBridge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="styles/styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <!-- Resource Library page-specific stylesheet -->
+    <link href="styles/resource-library.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ── Navbar ── -->
+    <nav class="navbar" id="navbar" aria-label="Main navigation">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo" aria-label="MindBridge Home">MindBridge</a>
+            <div class="nav-left" role="menubar">
+                <a href="index.html" role="menuitem">Home</a>
+                <a href="self-assessment.html" role="menuitem">Self-Assessment</a>
+                <a href="resource-library.html" role="menuitem">Resource Library</a>
+                <a href="mood-tracker.html" role="menuitem">Mood Tracker</a>
+                <a href="find-support.html" role="menuitem">Find Support</a>
+                <a href="community-forum.html" role="menuitem">Community Forum</a>
+            </div>
+            <div class="nav-right">
+                <span class="nav-divider" aria-hidden="true"></span>
+                <a href="register.html" class="register">Register</a>
+                <a href="login.html" class="login-btn">Log In</a>
+            </div>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false"
+                onclick="toggleMobileMenu()">
+                <span class="menu-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/>
+                    </svg>
+                </span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+        <div class="mobile-menu-header">
+            <span class="mobile-menu-logo">MindBridge</span>
+            <button class="mobile-close" aria-label="Close menu" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M6 6l12 12"/><path d="M18 6L6 18"/>
+                </svg>
+            </button>
+        </div>
+        <div style="flex-grow:1;overflow-y:auto">
+            <a href="index.html" class="mobile-link">Home</a>
+            <a href="self-assessment.html" class="mobile-link">Self-Assessment</a>
+            <a href="resource-library.html" class="mobile-link">Resource Library</a>
+            <a href="mood-tracker.html" class="mobile-link">Mood Tracker</a>
+            <a href="find-support.html" class="mobile-link">Find Support</a>
+            <a href="community-forum.html" class="mobile-link">Community Forum</a>
+        </div>
+        <div class="mobile-actions">
+            <a href="register.html" class="register-mobile">Register</a>
+            <a href="login.html" class="btn-primary" style="text-align:center;justify-content:center">Log In</a>
+        </div>
+    </div>
+    <br><br>
+
+    <!-- ── Main content ── -->
+    <main class="library-page">
+        <div class="library-container">
+
+            <div class="library-header">
+                <h1>Resource Library</h1>
+                <p>Explore our collection of mental health resources.</p>
+            </div>
+
+            <!-- Search -->
+            <div class="search-row">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search resources…" oninput="filterCards()" aria-label="Search resources">
+                <button class="btn-search" onclick="filterCards()">Search</button>
+            </div>
+
+            <!-- Filter pills -->
+            <div class="filter-row" id="filterRow" role="group" aria-label="Filter by category">
+                <button class="filter-pill active" data-filter="all"                onclick="setFilter(this)">All</button>
+                <button class="filter-pill" data-filter="anxiety"                   onclick="setFilter(this)">Anxiety</button>
+                <button class="filter-pill" data-filter="depression"                onclick="setFilter(this)">Depression</button>
+                <button class="filter-pill" data-filter="stress-management"         onclick="setFilter(this)">Stress Management</button>
+                <button class="filter-pill" data-filter="mindfulness"               onclick="setFilter(this)">Mindfulness</button>
+                <button class="filter-pill" data-filter="relationships"             onclick="setFilter(this)">Relationships</button>
+                <button class="filter-pill" data-filter="sleep"                     onclick="setFilter(this)">Sleep</button>
+            </div>
+
+            <!-- Resource cards -->
+            <div class="resource-grid" id="resourceGrid">
+
+                <!-- Card 1 -->
+                <div class="resource-card" data-category="anxiety" data-title="managing anxiety">
+                    <div class="card-top">
+                        <span class="card-title">Managing Stress</span>
+                        <button class="heart-btn" aria-label="Save Managing Anxiety" onclick="toggleHeart(this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&h=220&q=80"
+                            alt="Managing Anxiety" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-type-badge badge-article">Article</span>
+                        <a href="https://www.mind.org.uk/information-support/types-of-mental-health-problems/stress/"
+                        target="_blank"
+                        class="btn-card">
+                            Read
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="resource-card" data-category="depression" data-title="understanding depression">
+                    <div class="card-top">
+                        <span class="card-title">Understanding Depression</span>
+                        <button class="heart-btn" aria-label="Save Understanding Depression" onclick="toggleHeart(this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=600&h=220&q=80"
+                            alt="Understanding Depression" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-type-badge badge-video">Video</span>
+                        <a href="https://www.youtube.com/watch?v=z-IR48Mb3W0"
+                        target="_blank"
+                        class="btn-card">
+                            Watch
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="resource-card" data-category="stress-management" data-title="stress management tips">
+                    <div class="card-top">
+                        <span class="card-title">Stress Management Tips</span>
+                        <button class="heart-btn" aria-label="Save Stress Management Tips" onclick="toggleHeart(this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=600&h=220&q=80"
+                            alt="Stress Management" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-type-badge badge-article">Article</span>
+                        <a href="https://www.nhs.uk/every-mind-matters/mental-wellbeing-tips/how-to-manage-stress/"
+                        target="_blank"
+                        class="btn-card">
+                            Read
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="resource-card" data-category="mindfulness" data-title="mindfulness for beginners">
+                    <div class="card-top">
+                        <span class="card-title">Mindfulness for Beginners</span>
+                        <button class="heart-btn" aria-label="Save Mindfulness for Beginners" onclick="toggleHeart(this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&h=220&q=80"
+                            alt="Mindfulness" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-type-badge badge-guide">Guide</span>
+                        <button class="btn-card">Read</button>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="resource-card" data-category="sleep" data-title="sleep better naturally">
+                    <div class="card-top">
+                        <span class="card-title">Sleep Better Naturally</span>
+                        <button class="heart-btn" aria-label="Save Sleep Better Naturally" onclick="toggleHeart(this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1541480551145-2370a440d585?auto=format&fit=crop&w=600&h=220&q=80"
+                            alt="Sleep Better" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-type-badge badge-article">Article</span>
+                        <button class="btn-card">Read</button>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="resource-card" data-category="depression" data-title="building self-esteem">
+                    <div class="card-top">
+                        <span class="card-title">Building Self-Esteem</span>
+                        <button class="heart-btn" aria-label="Save Building Self-Esteem" onclick="toggleHeart(this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=600&h=220&q=80"
+                            alt="Building Self-Esteem" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-type-badge badge-article">Article</span>
+                        <button class="btn-card">Read</button>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="resource-card" data-category="relationships" data-title="healthy relationships">
+                    <div class="card-top">
+                        <span class="card-title">Healthy Relationships</span>
+                        <button class="heart-btn" aria-label="Save Healthy Relationships" onclick="toggleHeart(this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&h=220&q=80"
+                            alt="Healthy Relationships" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-type-badge badge-guide">Guide</span>
+                        <button class="btn-card">Read</button>
+                    </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="resource-card" data-category="anxiety" data-title="breathing exercises for calm">
+                    <div class="card-top">
+                        <span class="card-title">Breathing Exercises for Calm</span>
+                        <button class="heart-btn" aria-label="Save Breathing Exercises" onclick="toggleHeart(this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&h=220&q=80"
+                            alt="Breathing Exercises" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-type-badge badge-exercise">Exercise</span>
+                        <button class="btn-card">Try it</button>
+                    </div>
+                </div>
+
+                <!-- Card 9 -->
+                <div class="resource-card" data-category="mindfulness" data-title="daily meditation practice">
+                    <div class="card-top">
+                        <span class="card-title">Daily Meditation Practice</span>
+                        <button class="heart-btn" aria-label="Save Daily Meditation" onclick="toggleHeart(this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=600&h=220&q=80"
+                            alt="Daily Meditation" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-type-badge badge-video">Video</span>
+                        <button class="btn-card">Watch</button>
+                    </div>
+                </div>
+
+                <!-- Card 10 -->
+                <div class="resource-card" data-category="journaling" data-title="journaling for mental wellness">
+                    <div class="card-top">
+                        <span class="card-title">Journaling for Mental Wellness</span>
+
+                        <button class="heart-btn"
+                            aria-label="Save Journaling"
+                            onclick="toggleHeart(this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&h=220&q=80"
+                            alt="Journaling"
+                            onerror="this.style.display='none'">
+                    </div>
+
+                    <div class="card-footer">
+                        <span class="card-type-badge badge-guide">Guide</span>
+
+                        <a href="https://positivepsychology.com/journaling/"
+                        target="_blank"
+                        class="btn-card">
+                            Read
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 11 -->
+                <div class="resource-card" data-category="wellbeing" data-title="gratitude practice">
+                    <div class="card-top">
+                        <span class="card-title">Gratitude Practice</span>
+
+                        <button class="heart-btn"
+                            aria-label="Save Gratitude"
+                            onclick="toggleHeart(this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=600&h=220&q=80"
+                            alt="Gratitude"
+                            onerror="this.style.display='none'">
+                    </div>
+
+                    <div class="card-footer">
+                        <span class="card-type-badge badge-exercise">Exercise</span>
+
+                        <a href="https://greatergood.berkeley.edu/topic/gratitude"
+                        target="_blank"
+                        class="btn-card">
+                            Explore
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 12 -->
+                <div class="resource-card" data-category="burnout" data-title="coping with burnout">
+                    <div class="card-top">
+                        <span class="card-title">Coping with Burnout</span>
+
+                        <button class="heart-btn"
+                            aria-label="Save Burnout"
+                            onclick="toggleHeart(this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1493836512294-502baa1986e2?auto=format&fit=crop&w=600&h=220&q=80"
+                            alt="Burnout"
+                            onerror="this.style.display='none'">
+                    </div>
+
+                    <div class="card-footer">
+                        <span class="card-type-badge badge-article">Article</span>
+
+                        <a href="https://www.helpguide.org/articles/stress/burnout-prevention-and-recovery.htm"
+                        target="_blank"
+                        class="btn-card">
+                            Read
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Empty state -->
+                <div class="empty-state" id="emptyState">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                    <p>No resources found. Try a different search or category.</p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- ── Footer ── -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <span class="logo">MindBridge</span>
+                <p>Our vision is to provide convenience and help increase your sales business.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>About</h4>
+                <a href="#">How it works</a>
+                <a href="#">Featured</a>
+                <a href="#">Partnership</a>
+                <a href="#">Business Relation</a>
+            </div>
+            <div class="footer-col">
+                <h4>Community</h4>
+                <a href="#">Events</a>
+                <a href="#">Blog</a>
+                <a href="#">Podcast</a>
+                <a href="#">Invite a friend</a>
+            </div>
+            <div class="footer-col">
+                <h4>Socials</h4>
+                <a href="#">Discord</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>©2026 MindBridge. All rights reserved.</span>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy &amp; Policy</a>
+                <a href="#">Terms &amp; Condition</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+    <!-- Resource Library page-specific JavaScript -->
+    <script src="js/resource-library.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register – MindBridge</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link href="styles/styles.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+
+  <!-- <link rel="stylesheet" href="styles/styles.css"> -->
+  <link rel="stylesheet" href="styles/register.css">
+</head>
+
+<body>
+  <nav class="navbar" id="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+
+      <a href="index.html" class="nav-logo" aria-label="MindBridge Home">MindBridge</a>
+
+      <!-- The default navigation items on large screens -->
+      <div class="nav-left" role="menubar">
+        <a href="index.html" role="menuitem">Home</a>
+        <a href="self-assessment.html" role="menuitem">Self-Assessment</a>
+        <a href="resource-library.html" role="menuitem">Resource Library</a>
+        <a href="mood-tracker.html" role="menuitem">Mood Tracker</a>
+        <a href="find-support.html" role="menuitem">Find Support</a>
+        <a href="community-forum.html" role="menuitem">Community Forum</a>
+      </div>
+
+      <div class="nav-right">
+        <span class="nav-divider" aria-hidden="true"></span>
+        <a href="register.html" class="register">Register</a>
+        <a href="login.html" class="login-btn">Log In</a>
+      </div>
+
+      <!-- The hamburger menu is hidden by default and only displayed on smaller screens -->
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false"
+        onclick="toggleMobileMenu()">
+        <span class="menu-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round">
+            <path d="M4 7h16" />
+            <path d="M4 12h16" />
+            <path d="M4 17h16" />
+          </svg>
+        </span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- After the media query shows the hamburger menu, the onclick function
+handles the opening and closing of the navbar -->
+  <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div class="mobile-menu-header">
+      <span class="mobile-menu-logo">MindBridge</span>
+      <button class="mobile-close" aria-label="Close menu" onclick="closeMobileMenu()">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round">
+          <path d="M6 6l12 12" />
+          <path d="M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu Items -->
+    <div style="flex-grow:1;overflow-y:auto">
+      <a href="index.html" class="mobile-link">Home</a>
+      <a href="self-assessment.html" class="mobile-link">Self-Assessment</a>
+      <a href="resource-library.html" class="mobile-link">Resource Library</a>
+      <a href="mood-tracker.html" class="mobile-link">Mood Tracker</a>
+      <a href="find-support.html" class="mobile-link">Find Support</a> <a href="community-forum.html"
+        class="mobile-link">Community Forum</a>
+    </div>
+
+    <div class="mobile-actions">
+      <a href="register.html" class="register" id="navRegister">Register</a>
+      <a href="login.html" class="login-btn" id="navLogin">Log In</a>
+    </div>
+  </div>
+
+  <br><br>
+  <main class="auth-page">
+    <div class="auth-card">
+      <span class="auth-brand">MindBridge</span>
+      <h1>Create your account</h1>
+      <p class="auth-sub">Join others taking their first step toward better mental well-being.</p>
+      <div class="alert-box" id="alertBox"></div>
+      <div class="form-row-2">
+        <div class="fg"><label for="firstName">First Name</label><input type="text" id="firstName"
+            placeholder="Aisha"><span class="ferr" id="e-firstName">Required</span></div>
+        <div class="fg"><label for="lastName">Last Name</label><input type="text" id="lastName"
+            placeholder="Rahman"><span class="ferr" id="e-lastName">Required</span></div>
+      </div>
+      <div class="fg"><label for="username">Username</label><input type="text" id="username" placeholder="aisha_r"><span
+          class="ferr" id="e-username">Required</span></div>
+      <div class="fg"><label for="email">Email address</label><input type="email" id="email"
+          placeholder="aisha@email.com"><span class="ferr" id="e-email">Enter a valid email</span></div>
+      <div class="fg"><label for="dob">Date of Birth</label><input type="date" id="dob"><span class="ferr"
+          id="e-dob">Required</span></div>
+      <div class="fg">
+        <label for="password">Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="password" placeholder="At least 8 characters" oninput="checkStr(this.value)">
+          <button type="button" class="pw-eye" onclick="togglePw('password')" aria-label="Toggle password">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+        </div>
+        <div class="str-bar">
+          <div class="str-fill" id="strFill"></div>
+        </div>
+        <span class="str-lbl" id="strLbl"></span>
+        <span class="ferr" id="e-password">Min. 8 characters required</span>
+      </div>
+      <div class="fg">
+        <label for="confirmPw">Confirm Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="confirmPw" placeholder="Re-enter password">
+          <button type="button" class="pw-eye" onclick="togglePw('confirmPw')" aria-label="Toggle password">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+        </div>
+        <span class="ferr" id="e-confirmPw">Passwords do not match</span>
+      </div>
+      <div class="terms-row">
+        <input type="checkbox" id="terms">
+        <label for="terms">I agree to MindBridge's <a href="#">Terms of Service</a> and <a href="#">Privacy
+            Policy</a></label>
+      </div>
+      <button class="btn-auth" onclick="doRegister()">Create Account</button>
+      <p class="auth-foot">Already have an account? <a href="login.html">Log in</a></p>
+    </div>
+  </main>
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo">MindBridge</span>
+        <p>Our vision is to provide convenience and help increase your mental well-being.</p>
+        <div class="social-icons">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg></a>
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4><a href="#">How it works</a><a href="#">Featured</a><a href="#">Partnership</a><a
+          href="#">Business Relation</a>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4><a href="#">Events</a><a href="#">Blog</a><a href="#">Podcast</a><a href="#">Invite a
+          friend</a>
+      </div>
+      <div class="footer-col">
+        <h4>Socials</h4><a href="#">Discord</a><a href="#">Instagram</a><a href="#">Twitter</a><a href="#">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>©2026 MindBridge. All rights reserved.</span>
+      <div class="footer-bottom-links"><a href="#">Privacy &amp; Policy</a><a href="#">Terms &amp; Condition</a></div>
+    </div>
+  </footer>
+  <script src="js/scripts.js"></script>
+  <script>
+    function togglePw(id) { const i = document.getElementById(id); i.type = i.type === 'password' ? 'text' : 'password'; }
+    function checkStr(pw) {
+      const f = document.getElementById('strFill'), l = document.getElementById('strLbl');
+      let s = 0;
+      if (pw.length >= 8) s++; if (/[A-Z]/.test(pw)) s++; if (/[0-9]/.test(pw)) s++; if (/[^A-Za-z0-9]/.test(pw)) s++;
+      const lvl = [['0%', '', ''], ['25%', '#ef4444', 'Weak'], ['50%', '#f59e0b', 'Fair'], ['75%', '#3b82f6', 'Good'], ['100%', '#22c55e', 'Strong']][s];
+      f.style.width = lvl[0]; f.style.background = lvl[1]; l.textContent = lvl[2];
+    }
+    function showErr(id, msg) { const i = document.getElementById(id), e = document.getElementById('e-' + id); if (i) i.classList.add('err'); if (e) { if (msg) e.textContent = msg; e.classList.add('show'); } }
+    function clearAll() { document.querySelectorAll('.ferr').forEach(e => e.classList.remove('show')); document.querySelectorAll('input').forEach(i => i.classList.remove('err')); const b = document.getElementById('alertBox'); b.className = 'alert-box'; b.textContent = ''; }
+    function doRegister() {
+      clearAll();
+      const fn = document.getElementById('firstName').value.trim();
+      const ln = document.getElementById('lastName').value.trim();
+      const un = document.getElementById('username').value.trim().toLowerCase();
+      const em = document.getElementById('email').value.trim();
+      const db = document.getElementById('dob').value;
+      const pw = document.getElementById('password').value;
+      const cp = document.getElementById('confirmPw').value;
+      const tc = document.getElementById('terms').checked;
+      let ok = true;
+      if (!fn) { showErr('firstName'); ok = false; }
+      if (!ln) { showErr('lastName'); ok = false; }
+      if (!un) { showErr('username'); ok = false; }
+      if (!em || !/^\S+@\S+\.\S+$/.test(em)) { showErr('email'); ok = false; }
+      if (!db) { showErr('dob'); ok = false; }
+      if (pw.length < 8) { showErr('password'); ok = false; }
+      if (pw !== cp) { showErr('confirmPw'); ok = false; }
+      if (!ok) return;
+      if (!tc) { const b = document.getElementById('alertBox'); b.className = 'alert-box bad'; b.textContent = 'Please accept the Terms of Service to continue.'; return; }
+      const users = JSON.parse(localStorage.getItem('mb_users') || '{}');
+      if (users[un]) { showErr('username', 'Username already taken'); return; }
+      users[un] = { firstName: fn, lastName: ln, email: em, dob: db, password: pw, createdAt: new Date().toISOString() };
+      localStorage.setItem('mb_users', JSON.stringify(users));
+      localStorage.setItem('mb_session', JSON.stringify({ username: un, firstName: fn, lastName: ln }));
+      const b = document.getElementById('alertBox'); b.className = 'alert-box ok'; b.textContent = 'Welcome, ' + fn + '! Account created. Redirecting…';
+      setTimeout(() => { location.href = 'index.html'; }, 1400);
+    }
+  </script>
+</body>
+
+</html>

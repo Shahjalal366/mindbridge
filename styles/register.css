@@ -1,0 +1,38 @@
+/* =====================================================
+   Register Page Styles
+   This file controls the layout and design for register.html.
+===================================================== */
+
+.auth-page { min-height:calc(100vh - 72px); background:var(--sand); display:flex; align-items:center; justify-content:center; padding:48px 24px; }
+        .auth-card { background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow-lg); padding:44px 40px; width:100%; max-width:480px; }
+        @media(max-width:520px){ .auth-card{padding:28px 20px;} }
+        .auth-brand { font-family:'Manrope',sans-serif; font-size:1.2rem; font-weight:800; color:var(--primary); margin-bottom:4px; display:block; }
+        .auth-card h1 { font-size:1.6rem; font-weight:800; color:var(--charcoal); margin:0 0 4px; }
+        .auth-sub { font-size:.9rem; color:#6b7280; margin:0 0 28px; }
+        .form-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+        @media(max-width:400px){ .form-row-2{grid-template-columns:1fr;} }
+        .fg { display:flex; flex-direction:column; gap:5px; margin-bottom:14px; }
+        .fg label { font-size:.8rem; font-weight:700; color:#374151; font-family:'Manrope',sans-serif; }
+        .fg input { padding:11px 14px; border:1.5px solid #e5e7eb; border-radius:var(--radius-sm); font-family:'Source Sans 3',sans-serif; font-size:.93rem; color:var(--charcoal); background:var(--surface); outline:none; transition:border-color .2s,box-shadow .2s; width:100%; }
+        .fg input:focus { border-color:var(--primary); box-shadow:0 0 0 3px var(--primary-light); }
+        .fg input.err { border-color:#ef4444; }
+        .ferr { font-size:.73rem; color:#ef4444; display:none; }
+        .ferr.show { display:block; }
+        .pw-wrap { position:relative; }
+        .pw-wrap input { padding-right:44px; }
+        .pw-eye { position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:#9ca3af; display:flex; align-items:center; padding:0; }
+        .pw-eye:hover { color:var(--primary); }
+        .str-bar { height:4px; background:#f3f4f6; border-radius:4px; margin-top:5px; overflow:hidden; }
+        .str-fill { height:100%; border-radius:4px; width:0; transition:width .3s,background .3s; }
+        .str-lbl { font-size:.7rem; color:#9ca3af; margin-top:2px; }
+        .terms-row { display:flex; align-items:flex-start; gap:10px; margin-bottom:20px; }
+        .terms-row input[type=checkbox] { margin-top:3px; accent-color:var(--primary); flex-shrink:0; }
+        .terms-row label { font-size:.82rem; color:#6b7280; line-height:1.45; }
+        .terms-row a { color:var(--primary); }
+        .btn-auth { width:100%; padding:13px; border-radius:var(--radius-sm); background:var(--primary); color:#fff; font-family:'Manrope',sans-serif; font-size:1rem; font-weight:700; border:none; cursor:pointer; transition:background .2s,transform .12s; margin-bottom:18px; }
+        .btn-auth:hover { background:var(--primary-dark); transform:translateY(-1px); }
+        .auth-foot { text-align:center; font-size:.87rem; color:#6b7280; }
+        .auth-foot a { color:var(--primary); font-weight:600; }
+        .alert-box { padding:12px 16px; border-radius:var(--radius-sm); font-size:.87rem; margin-bottom:16px; display:none; }
+        .alert-box.ok  { background:#dcfce7; color:#15803d; border:1px solid #bbf7d0; display:block; }
+        .alert-box.bad { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; display:block; }

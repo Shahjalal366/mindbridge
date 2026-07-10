@@ -1,0 +1,3354 @@
+﻿/* ======================================================= */
+/* Global element reset and CSS custom properties for the UI */
+/* ======================================================= */
+
+/*
+    Reset the box model and remove browser default spacing.
+    This makes width calculations predictable for every element.
+    It also prevents unwanted margins from collapsing.
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+    Define shared design variables to keep color, shadow,
+    and radius values consistent across the site.
+    These tokens are used by all the major sections below.
+*/
+:root {
+    --primary: #0F4C81;
+    --primary-dark: #0A365D;
+    --primary-light: #E1EAF2;
+    --accent: #2563EB;
+    --accent-light: #DBEAFE;
+    --lavender: #4F46E5;
+    --lavender-light: #E0E7FF;
+    --sand: #F4F7F9;
+    --surface: #FFFFFF;
+    --charcoal: #000000;
+    --slate: #000000;
+    --muted: #000000;
+    --coral: #E11D48;
+    --coral-light: #FFE4E6;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --radius: 16px;
+    --radius-sm: 8px;
+}
+
+/*
+    Smooth scrolling improves navigation between anchors.
+    This affects in-page jumps and makes the experience feel softer.
+    It is enabled site-wide from the root HTML element.
+*/
+html {
+    scroll-behavior: smooth;
+}
+
+/*
+    Base page text settings, background, and overflow guard.
+    This keeps text readable and prevents horizontal scrolling.
+*/
+body {
+    min-height: 100%;
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--charcoal);
+    line-height: 1.6;
+    font-size: 16px;
+    background: var(--sand);
+    overflow-x: hidden;
+}
+
+/*
+    Heading styles for the main typographic hierarchy.
+    These headings use a stronger font with tighter line spacing.
+*/
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+/*
+    Anchor tags inherit color from surrounding text by default.
+    This avoids bright blue underlines and keeps links subtle.
+*/
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/*
+    Visually hidden utility keeps labels available for screen readers.
+    It is useful when compact controls need accessible names.
+*/
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/*
+    Button defaults remove browser-specific borders and outlines.
+    This allows custom button styles to render consistently.
+*/
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+/*
+    Visible focus styles support keyboard navigation and accessibility.
+    They ensure interactive elements are clearly highlighted.
+*/
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--primary-light);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/*
+    Make images responsive and block-level to eliminate inline gaps.
+    This allows the layout to scale cleanly inside flexible containers.
+*/
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/*
+    Standard centered page wrapper for content width control.
+    Horizontal padding keeps content away from screen edges.
+*/
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ── NAVBAR ── */
+/*
+    Header wrapper that spans the full width and sits above page content.
+    Uses a soft background and blur effect to separate the nav visually.
+*/
+.navbar {
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1100;
+    height: 72px;
+    padding: 0 24px;
+    background: #DCE7F3;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(37, 99, 235, 0.10);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    position: fixed;
+}
+
+/*
+    Raw anchor color used in the desktop nav to ensure contrast.
+    This color is intentionally darker than the body text.
+*/
+.nav-left a {
+    padding: 10px 18px;
+    border-radius: var(--radius-sm);
+    color: var(--slate);
+    font-size: 17px;
+    font-weight: 700;
+    transition: background .2s, color .2s;
+}
+
+/*
+    Scrolled navbar state adds a crisper backdrop and subtle shadow.
+    This makes the header feel elevated when the user scrolls.
+*/
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/*
+    Layout container for logo, menu links, and action buttons.
+    Uses flexbox to place items horizontally with space between.
+*/
+.nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/*
+    Logo styling maintains brand weight and ensures it stays visible.
+    The extra gap allows icon/text combinations to sit comfortably.
+*/
+.nav-logo {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    color: var(--charcoal);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity .2s;
+}
+
+/*
+    Logo hover state reduces opacity slightly for a subtle effect.
+    It reinforces the interactive nature of the brand element.
+*/
+.nav-logo:hover {
+    opacity: .8;
+}
+
+/*
+    Container for desktop navigation links with spacing.
+    Uses flexbox so each link lines up in a single row.
+*/
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+/*
+    Desktop nav links use padding and rounded corners for tap targets.
+    Transitions make hover interactions smooth and less abrupt.
+*/
+.nav-left a {
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    color: var(--slate);
+    transition: background .2s, color .2s;
+}
+
+/*
+    Hover state for nav links increases contrast and background.
+    This clearly signals interactivity to the user.
+*/
+.nav-left a:hover {
+    background: var(--sand);
+    color: var(--charcoal);
+}
+
+/*
+    Active nav link styling highlights the current page.
+    A solid primary background creates a strong visual cue.
+*/
+.nav-left a.active {
+    color: #ffffff;
+    background: var(--primary);
+}
+
+/*
+    Action area for login/register controls in the header.
+    Aligns button-like elements and keeps them grouped together.
+*/
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/*
+    Thin separator line between navigation links and actions.
+    Adds breathing room without distracting from the nav items.
+*/
+.nav-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(15, 23, 42, 0.1);
+    margin: 0 8px;
+}
+
+/*
+    Register link styles appear as a secondary action button.
+    The hover effect swaps the background to a subtle surface tone.
+*/
+.nav-right .register {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--charcoal);
+    padding: 9px 18px;
+    border-radius: var(--radius-sm);
+    transition: color .2s, background .2s;
+}
+
+/*
+    Hover styles for the register link reinforce interactivity.
+    The color shift and soft background show the button is active.
+    This state helps users distinguish the link from static text.
+*/
+.nav-right .register:hover {
+    color: var(--primary);
+    background: var(--sand);
+}
+
+/*
+    Login button is the primary CTA in the header.
+    It uses the brand color and a raised hover effect for emphasis.
+*/
+.nav-right .login-btn {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--primary);
+    padding: 12px 28px;
+    border-radius: var(--radius-sm);
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/*
+    Hover state for the login button increases elevation.
+    Subtle transform and shadow reinforce a button press effect.
+    This interaction makes the CTA feel more tactile.
+*/
+.nav-right .login-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(15, 76, 129, 0.2);
+}
+
+/*
+    Logged-in user label and logout button.
+    These styles are used when JavaScript replaces Log In with Log Out.
+*/
+.nav-user {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-right: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logout-btn {
+    color: #dc2626;
+    font-size: 17px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.logout-btn:hover {
+    color: #b91c1c;
+}
+
+
+/*
+    Hidden hamburger button in desktop layout.
+    Revealed on mobile screens to replace the full nav links.
+*/
+.hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--charcoal);
+    transition: background .2s;
+}
+
+/*
+    Hover state for the mobile menu button.
+    It gives visual feedback that the button is interactive.
+*/
+.hamburger:hover {
+    background: var(--sand);
+}
+
+/*
+    Inner icon wrapper aligns the menu icon inside the button.
+    It ensures the icon is centered within the touch target.
+*/
+.hamburger .menu-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+@media(max-width: 1000px) {
+    /*
+        Hide desktop nav elements and show the hamburger button.
+        This keeps the header clean on narrower screens.
+    */
+    .nav-left,
+    .nav-right {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex !important;
+    }
+}
+
+/* ── MOBILE MENU ── */
+/*
+    Full-screen overlay behind mobile navigation.
+    It blocks interaction with the page while the menu is open.
+*/
+.mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    z-index: 1100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+    backdrop-filter: blur(4px);
+}
+
+/*
+    Visible overlay state when the mobile menu is active.
+    Allows clicks outside the menu to close the panel.
+*/
+.mobile-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/*
+    Mobile menu panel slides in from the right.
+    It uses fixed positioning so it stays visible during scroll.
+*/
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 320px;
+    background: var(--surface);
+    z-index: 1200;
+    padding: 0 32px 32px;
+    transform: translateX(100%);
+    transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+/*
+    When the mobile menu is open, slide the panel fully into view.
+    This completes the animated entrance effect.
+*/
+.mobile-menu.open {
+    transform: translateX(0);
+}
+
+/*
+    Mobile menu header contains the brand and close button.
+    Uses horizontal spacing to separate the two controls.
+*/
+.mobile-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 0 20px;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    margin-bottom: 12px;
+}
+
+/*
+    Branding inside the mobile menu uses a bold logo style.
+    The size ensures it is visible without overwhelming the panel.
+*/
+.mobile-menu-logo {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--charcoal);
+}
+
+/*
+    Close button styling for the mobile nav panel.
+    A minimal visual treatment keeps the panel feeling light.
+*/
+.mobile-close {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: var(--charcoal);
+    border-radius: var(--radius-sm);
+    transition: background .2s;
+    display: flex;
+    align-items: center;
+}
+
+/*
+    Hover state for the mobile close button gives feedback
+    when the user wants to dismiss the menu overlay.
+    The slight background change improves touch affordance.
+*/
+.mobile-close:hover {
+    background: var(--sand);
+}
+
+/*
+    Mobile navigation links are full-width blocks for easy tapping.
+    Each link has a bottom border to separate the list visually.
+*/
+.mobile-link {
+    display: block;
+    padding: 18px 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--slate);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.04);
+    transition: color .2s, padding-left .2s;
+}
+
+/*
+    Hover state for mobile nav links highlights the active option.
+    The subtle left padding and color shift improve readability.
+    This helps users recognize their touch target clearly.
+*/
+.mobile-link:hover {
+    color: var(--primary);
+    padding-left: 8px;
+}
+
+/*
+    Mobile action section pushes register/login buttons to the bottom.
+    The margin-top auto value keeps this area anchored at the bottom.
+*/
+.mobile-actions {
+    margin-top: auto;
+    padding-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/*
+    Secondary mobile register action with centered text.
+    This makes the button easier to tap on narrow phones.
+*/
+.mobile-actions .register-mobile {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--charcoal);
+    text-align: center;
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    transition: background .2s;
+}
+
+/*
+    Hover styles for the mobile register action give a soft visual cue.
+    The background shift indicates the button is ready to be tapped.
+    It keeps the control feeling responsive and approachable.
+*/
+.mobile-actions .register-mobile:hover {
+    background: var(--sand);
+}
+
+/*
+    Primary CTA button style for the action area.
+    Uses brand color, padding, and a smooth hover lift effect.
+*/
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+    padding: 14px 24px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 16px;
+    transition: all .3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(15, 76, 129, 0.25);
+}
+
+/* ── HERO ── */
+/*
+    Hero section sets the main page introduction area.
+    It centers text and imagery with generous vertical padding.
+*/
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sand);
+    padding: 20px 30px 60px;
+    min-height: calc(100vh - 72px);
+}
+
+/*
+    Inner hero container creates a horizontally centered layout.
+    Gap and centering keep text and image balanced on wide screens.
+*/
+.hero-inner{
+    max-width:1250px;
+    width:100%;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    align-items:center;
+    gap:80px;
+}
+/*
+    Hero text column stacks heading, paragraph, and CTA vertically.
+    It keeps the text block aligned for a clean introduction area.
+*/
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    margin-bottom: 0;
+    gap: 0;
+    max-width: 650px;
+}
+
+/*
+    Main headline styling uses clamp for responsive scaling.
+    It ensures the heading stays large but never overflows.
+*/
+.hero-text h1 {
+    font-size: clamp(36px, 4.2vw, 52px);
+    font-weight: 800;
+    color: var(--charcoal);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+
+/*
+    Hero subtitle styling with controlled line height and spacing.
+    White-space is kept tight to avoid awkward wrapping.
+*/
+.hero-text p {
+    font-size: clamp(16px, 2vw, 18px);
+    color: var(--slate);
+    line-height: 1.8;
+    margin-bottom: 30px;
+    white-space: nowrap;
+}
+
+.hero-features{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin:30px 0;
+}
+
+.hero-feature{
+    background:white;
+    padding:16px 20px;
+    border-radius:16px;
+    font-weight:700;
+    box-shadow:0 8px 18px rgba(0,0,0,.05);
+}
+
+.hero-buttons{
+    display:flex;
+    gap:18px;
+    margin-top:34px;
+}
+
+.hero-stats{
+    display:flex;
+    gap:45px;
+    margin-top:45px;
+}
+
+.hero-stats strong{
+    display:block;
+    font-size:2rem;
+    color:var(--primary);
+}
+
+.hero-stats span{
+    color:#6b7280;
+}
+
+
+/*
+    Outline button is the primary hero CTA style.
+    It uses a dark fill and keeps the text centered inside.
+*/
+.btn-outline {
+    border: 2px solid var(--charcoal);
+    color: #ffffff;
+    background: var(--charcoal);
+    padding: 14px 32px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 16px;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    cursor: pointer;
+}
+
+/*
+    Hero button hover state reveals a transparent background.
+    This helps reinforce the button's interactive quality.
+*/
+.btn-outline:hover {
+    background: transparent;
+    color: var(--charcoal);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/*
+    Image wrapper positions the hero media and creates a glow layer.
+    Relative positioning allows the decorative circle to sit behind it.
+*/
+.hero-img-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 28px;
+}
+
+
+.hero-img-wrap::before {
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 80%;
+    background: var(--primary-light);
+    border-radius: 50%;
+    z-index: 0;
+    filter: blur(80px);
+    opacity: 0.6;
+}
+
+/*
+    Hero image styling keeps the media responsive and rounded.
+    The shadow and transform create a polished floating effect.
+*/
+.hero-img-wrap img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.5s ease;
+}
+
+.hero-img-wrap img:hover {
+    transform: translateY(-8px);
+}
+
+/* ── CRISIS BANNER ── */
+/*
+    Crisis section container separates emergency messaging visually.
+    Negative margin helps overlap the hero area for continuity.
+*/
+.crisis-section {
+    background: var(--sand);
+    padding: 0 0px 80px;
+    max-width: 100%;
+    margin-bottom: -60px;
+}
+
+/*
+    Crisis banner card uses flex layout to place text and CTA side by side.
+    It also adds a subtle border and shadow for a raised appearance.
+*/
+.crisis-banner {
+    max-width: 90%;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+/*
+    Text container within the crisis banner keeps message content aligned.
+    It uses flex to align text and the accent bar vertically.
+*/
+.crisis-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex: 1;
+}
+
+/*
+    Accent bar at the left side of the crisis banner.
+    It creates a strong visual signal for the emergency message.
+*/
+.crisis-bar {
+    width: 5px;
+    min-height: 52px;
+    border-radius: 999px;
+    background: #EF4444;
+}
+
+/*
+    Headline text inside the crisis banner is bold and readable.
+    The block display keeps it separate from the secondary text.
+*/
+.crisis-text strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: 4px;
+}
+
+/*
+    Supporting text in the crisis banner uses a lighter color tone.
+    Increased line height helps with readability.
+*/
+.crisis-text span {
+    font-size: 14px;
+    color: var(--slate);
+    line-height: 1.5;
+}
+
+/*
+    Call-to-action button for the crisis banner.
+    Uses a bold red color and padding for strong visibility.
+*/
+.btn-crisis {
+    background: #EF4444;
+    color: #fff;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all .25s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-crisis:hover {
+    background: #DC2626;
+    transform: translateY(-2px);
+}
+
+/* ── HOW CAN WE HELP ── */
+/*
+    Help section wrapper provides a light page background.
+    Padding separates it from surrounding sections.
+*/
+.help-section {
+    background: var(--sand);
+    padding: 100px 24px 80px;
+}
+
+/*
+    Section heading styling for the help cards area.
+    It centers the title and gives strong visual weight.
+*/
+.help-section h2 {
+    text-align: center;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    color: var(--charcoal);
+    margin-bottom: 60px;
+}
+
+/*
+    Grid layout for the help cards with equal-width columns.
+    Gap spacing ensures the cards do not touch each other.
+*/
+.help-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/*
+    Individual help card styling with a subtle border and shadow.
+    The card uses flex layout to space content vertically.
+*/
+.help-card {
+    background: var(--surface);
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+/*
+    Hover-style for the help cards adds lift and stronger shadow.
+    It also adjusts the border color to match the brand palette.
+*/
+.help-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(15, 76, 129, 0.15);
+}
+
+/*
+    Header row inside each card keeps title and heart icon aligned.
+    It uses flexbox to justify content between the two ends.
+*/
+.help-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/*
+    Card title styling in the help card header. 
+    Strong weight and color improve readability.
+*/
+.help-card-top h4 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--charcoal);
+    line-height: 1.4;
+}
+
+/*
+    Heart button styling for the card interactions.
+    It is round, padded, and uses a subtle background by default.
+*/
+.heart-btn {
+    background: var(--sand);
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all .3s ease;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heart-btn:hover {
+    color: var(--coral);
+    background: var(--coral-light);
+}
+
+/*
+    Liked state for the heart button uses the coral color.
+    It visually differentiates saved content from normal state.
+*/
+.heart-btn.liked {
+    color: var(--coral);
+    background: var(--coral-light);
+}
+
+/*
+    Card image container with fixed aspect ratio.
+    The rounded corners and overflow hidden keep the image tidy.
+*/
+.help-card-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--sand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+    Image within the card scales to fill the space cleanly.
+    The transform transition makes hover zoom feel smooth.
+*/
+.help-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.help-card:hover .help-card-img img {
+    transform: scale(1.05);
+}
+
+/*
+    Paragraph text inside help cards uses a softer tone.
+    Line height improves readability for longer descriptions.
+*/
+.help-card p {
+    font-size: 14px;
+    color: var(--slate);
+    line-height: 1.6;
+}
+
+/*
+    SDG context wrapper centers the label below the cards.
+    It keeps the tag horizontally aligned with the layout.
+*/
+.sdg-wrap {
+    max-width: 1280px;
+    margin: 40px auto 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+/*
+    SDG tag styling uses a compact pill shape for visual emphasis.
+    The primary color ties it back to the brand palette.
+*/
+.sdg-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    background: var(--primary);
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: default;
+}
+
+/* ── COMMUNITY FORUM ── */
+/*
+    Community forum main area controls the page spacing under the navbar.
+    The soft page background lets the forum cards stand out clearly.
+*/
+
+/* Page Wrapper */
+.forum-main {
+    background: linear-gradient(180deg, #F8FBFD 0%, #EEF4F8 100%);
+    padding: 56px 24px 80px;
+}
+
+.forum-shell {
+    max-width: 1450px;
+    margin: 0 auto;
+}
+
+/* Hero */
+.forum-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    margin-bottom: 36px;
+}
+
+.forum-kicker {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.forum-title {
+    text-align: left;
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.forum-subtitle {
+    max-width: 620px;
+    font-size: 1.2rem;
+    color: #6b7280;
+}
+
+/* Hero Stats */
+.forum-stats {
+    display: flex;
+    gap: 18px;
+}
+
+.forum-stats div {
+    background: #fff;
+    padding: 22px 26px;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.forum-stats strong {
+    display: block;
+    color: var(--primary);
+    font-size: 2rem;
+}
+
+.forum-stats span {
+    color: #6b7280;
+    font-weight: 700;
+}
+
+/* Main Layout */
+.forum-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 32px;
+    align-items: start;
+}
+
+.forum-main-column {
+    min-width: 0;
+}
+
+/* Composer */
+.forum-composer {
+    background: #fff;
+    border: 1px solid rgba(15, 76, 129, 0.10);
+    border-radius: 22px;
+    padding: 32px;
+    margin-bottom: 33px;
+    box-shadow: var(--shadow);
+}
+
+.forum-composer h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.forum-composer-row {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+}
+
+.forum-post-field {
+    flex: 1;
+    min-height: 150px;
+    border-radius: 18px;
+    padding: 18px 24px;
+    background: #E7EEF5;
+    border: 1px dashed rgba(15, 76, 129, 0.25);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.forum-post-field svg {
+    width: 22px;
+    height: 22px;
+    color: var(--primary);
+    flex-shrink: 0;
+    margin-top: 3px;
+}
+
+.forum-post-field textarea {
+    width: 100%;
+    min-height: 100px;
+    resize: vertical;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #1a202c;
+    font: inherit;
+    line-height: 150%;
+}
+
+.forum-post-field textarea::placeholder {
+    color: #53606d;
+}
+
+.forum-post-btn {
+    width: 180px;
+    height: 52px;
+    align-self: center;
+    border-radius: 14px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.forum-post-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Posts */
+.forum-posts {
+    background: #fff;
+    border: 1px solid rgba(15, 76, 129, 0.10);
+    border-radius: 22px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+}
+
+.forum-post {
+    display: grid;
+    grid-template-columns: 220px 1fr 140px;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+    border-radius: 18px;
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.forum-post + .forum-post {
+    margin-top: 16px;
+}
+
+.forum-post:hover {
+    background: #F8FBFD;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(15, 76, 129, 0.08);
+}
+
+.forum-post-image {
+    width: 220px;
+    height: 150px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #EEF5FB;
+}
+
+.forum-post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-category {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.forum-post-content h2 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.forum-post-content p {
+    font-size: 1rem;
+    color: #334155;
+    margin-bottom: 8px;
+}
+
+.forum-post-content span {
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+.forum-view-btn {
+    height: 48px;
+    border-radius: 14px;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.forum-view-btn:hover {
+    background: var(--primary-dark);
+}
+
+/* Sidebar */
+.forum-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.forum-side-card {
+    background: #fff;
+    border-radius: 22px;
+    padding: 26px 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(15, 76, 129, 0.08);
+}
+
+.forum-side-card h2 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 14px;
+}
+
+.forum-category-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.forum-category-btn {
+    border-radius: 999px;
+    background: #EEF5FB;
+    border: 1px solid rgba(15, 76, 129, 0.08);
+    padding: 10px 14px;
+    font-weight: 700;
+    color: #334155;
+    text-align: left;
+}
+
+.forum-category-btn:hover,
+.forum-category-btn.is-active {
+    background: var(--primary);
+    color: #fff;
+}
+
+.forum-guidelines {
+    text-align: left;
+}
+
+.forum-guidelines p {
+    color: #334155;
+    line-height: 1.6;
+}
+
+.popular-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.popular-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f4f6;
+    color: #4b5563;
+    font-weight: 600;
+}
+
+.popular-list li:last-child {
+    border-bottom: none;
+}
+
+.crisis-mini-card {
+    background: linear-gradient(135deg, #fff7ed 0%, #fffbeb 100%);
+    border-left: 5px solid #f59e0b;
+}
+
+.crisis-mini-card p {
+    color: #78350f;
+}
+
+.crisis-mini-card a {
+    display: inline-block;
+    margin-top: 14px;
+    background: #ef4444;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-weight: 800;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+    .forum-hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .forum-stats {
+        flex-wrap: wrap;
+    }
+
+    .forum-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .forum-post {
+        grid-template-columns: 1fr;
+    }
+
+    .forum-post-image {
+        width: 100%;
+        height: 220px;
+    }
+
+    .forum-title {
+        font-size: 2.8rem;
+    }
+
+    .forum-composer-row {
+        flex-direction: column;
+    }
+
+    .forum-post-btn {
+        width: 100%;
+    }
+}
+
+/* ── FIND SUPPORT ── */
+/*
+    Find support page uses the same full-width content system as the header.
+    The soft background helps the white result panel stand out clearly.
+*/
+.support-main {
+    background: linear-gradient(180deg, #F8FBFD 0%, #EEF4F8 100%);
+    padding: 64px 24px 72px;
+}
+
+/*
+    Support shell controls the page width and keeps content aligned.
+    It matches the 1280px layout used by the navbar and footer.
+*/
+.support-shell {
+    max-width: 1500px;
+    width:100%;
+    margin: 0 auto;
+}
+
+/*
+    Page heading is centered and compact.
+    The supporting line gives context without competing with the title.
+*/
+.support-heading {
+    text-align: center;
+    margin-bottom: 72px;
+}
+
+.support-heading h1 {
+    font-weight: 800;
+    font-size: 3.4rem;
+    line-height: 121%;
+    text-transform: uppercase;
+    color: #1a202c;
+    margin-bottom: 22px;
+}
+
+.support-heading p {
+    color: #64748b;
+    font-size: 1.25rem;
+    line-height: 150%;
+    margin-top:12px;
+}
+
+/*
+    Filter toolbar keeps all search controls in one horizontal row.
+    The grid allows each filter to stay evenly sized on desktop.
+*/
+.support-filters {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(150px, 1fr)) 170px;
+    align-items: end;
+    gap: 24px;
+    margin-bottom: 64px;
+    padding: 32px;
+    border-radius:22px;
+}
+
+/*
+    Filter labels sit above their buttons.
+    The muted color keeps labels secondary to the actual controls.
+*/
+.support-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.support-filter > label {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 140%;
+    font-weight: 700;
+}
+
+/*
+    Filter selects use native dropdown behavior with custom visual styling.
+    The arrow is drawn as a background image to keep the control compact.
+*/
+.support-select {
+    height: 56px;
+    border: 1px solid rgba(15, 76, 129, 0.18);
+    border-radius: 8px;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%230F4C81' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    color: #1a202c;
+    padding: 0 42px 0 14px;
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: inherit;
+    appearance: none;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.support-select:hover,
+.support-select:focus {
+    background-color: #E7EEF5;
+    border-color: rgba(15, 76, 129, 0.38);
+    color: var(--primary);
+    transform: translateY(-1px);
+    outline: none;
+}
+
+/*
+    Search button is the primary action in the filter toolbar.
+    Its filled style makes it easy to find after selecting filters.
+*/
+.support-search-btn {
+    height: 56px;
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    background: var(--primary);
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 800;
+    box-shadow: 0 12px 22px rgba(15, 76, 129, 0.18);
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.support-search-btn svg {
+    width: 17px;
+    height: 17px;
+}
+
+.support-search-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 28px rgba(15, 76, 129, 0.24);
+}
+
+/*
+    Results panel groups the available professionals into a clean list.
+    A subtle border and shadow separate the panel from the page background.
+*/
+.support-results {
+    background: #ffffff;
+    border: 1px solid rgba(15, 76, 129, 0.12);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 22px;
+    /* grid-template-columns:repeat(3,1fr); */
+    /* display: grid; */
+    gap: 30px;
+}
+
+/*
+    Individual support cards keep image, details, and action aligned.
+    Hover elevation makes each row feel interactive without changing layout.
+*/
+.support-card {
+    display: grid;
+    grid-template-columns: 280px 1fr 160px;
+    align-items: center;
+    gap: 34px;
+    min-height: 190px;
+    border-radius: 24px;
+    padding: 26px;
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.support-card + .support-card {
+    margin-top: 18px;
+}
+
+.support-card:hover {
+    background: #F8FBFD;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(15, 76, 129, 0.08);
+}
+
+/*
+    Photo wrapper keeps specialist images cropped consistently.
+    It also provides the positioning context for the favorite button.
+*/
+.support-photo-wrap {
+    position: relative;
+    width: 280px;
+    height: 260px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #E7EEF5;
+    object-fit:cover;
+
+}
+
+.support-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .4s ease;
+}
+
+.support-card:hover .support-photo-wrap img {
+    transform: scale(1.05);
+}
+
+/*
+    Heart button sits directly on the image.
+    The liked state is also triggered by the shared JavaScript heart function.
+*/
+.support-heart {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.90);
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.14);
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.support-heart svg {
+    width: 19px;
+    height: 19px;
+}
+
+.support-heart:hover,
+.support-heart.liked {
+    background: var(--coral-light);
+    color: var(--coral);
+    transform: scale(1.06);
+}
+
+/*
+    Specialist text block keeps credentials readable at a glance.
+    The role is visually muted while strong labels anchor the metadata.
+*/
+.support-card-content h2 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 800;
+    line-height: 130%;
+    color: #111827;
+    margin-bottom: 2px;
+}
+
+.support-role {
+    color: #94a3b8;
+    font-size: 1.2rem;
+    line-height: 140%;
+    margin-bottom: 6px;
+}
+
+.support-card-content p {
+    color: #334155;
+    font-size: 1.2rem;
+    line-height: 145%;
+}
+
+.support-card-content strong {
+    color: #111827;
+}
+
+/*
+    View buttons mirror the forum action buttons.
+    The icon makes the row action clearer and keeps the UI consistent.
+*/
+.support-view-btn {
+    width: 132px;
+    height: 52px;
+    justify-self: center;
+    border: 1px solid rgba(15, 76, 129, 0.28);
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--primary);
+    font-weight: 700;
+    font-weight: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.support-view-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.support-view-btn span {
+    font-size: 1.2rem;
+}
+
+.support-view-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+}
+
+.support-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin:40px 0;
+}
+
+.support-stat{
+    background:rgb(100, 209, 73);
+    border-radius:18px;
+    padding:24px;
+    text-align:center;
+    box-shadow:0 12px 24px rgba(0,0,0,.05);
+}
+
+.support-stat h2{
+    font-size:2.2rem;
+    color:white;
+    margin-bottom:8px;
+}
+
+.support-stat p{
+    color:#f7f8f9;
+}
+
+/* ── AUTH PAGES ── */
+/*
+    Auth body removes the site background and centers the form page.
+    This keeps login and registration screens focused on one task.
+*/
+.auth-body {
+    min-height: 100%;
+    background: linear-gradient(135deg, #F8FBFD 0%, #EAF2F8 100%);
+}
+
+/*
+    Auth main fills the viewport and positions the card with breathing room.
+    Padding keeps the card away from small screen edges.
+*/
+.auth-main {
+    min-height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 20px;
+}
+
+/*
+    Auth card mirrors the rounded panel from the provided login UX.
+    The stronger shadow gives it a polished product feel.
+*/
+.auth-card {
+    width: min(100%, 520px);
+    min-height: 640px;
+    border-radius: 34px;
+    background: #ffffff;
+    border: 1px solid rgba(15, 76, 129, 0.08);
+    box-shadow: 0 20px 42px rgba(15, 23, 42, 0.18);
+    padding: 46px 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+/*
+    Brand link keeps the user connected to the main site.
+    The primary color gives it the same identity as the navigation logo.
+*/
+.auth-brand {
+    align-self: flex-start;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 130%;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.auth-brand:hover {
+    color: var(--primary-dark);
+}
+
+/*
+    Login title uses compact display typography.
+    The line height keeps the heading close to the screenshot while readable.
+*/
+.auth-card h1 {
+    font-size: 31px;
+    font-weight: 800;
+    line-height: 118%;
+    color: #111827;
+    margin-bottom: 82px;
+    white-space: nowrap;
+}
+
+/*
+    Form layout stacks fields with measured spacing.
+    A max width makes the inputs match the compact card composition.
+*/
+.auth-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-intro {
+    margin-bottom: 18px;
+}
+
+.auth-intro h2 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 130%;
+    color: #303030;
+    margin-bottom: 14px;
+}
+
+.auth-intro p {
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 150%;
+}
+
+/*
+    Auth fields place the icon and input inside one pill container.
+    The focus state highlights the entire control, not just the input.
+*/
+.auth-field {
+    height: 50px;
+    border: 1px solid rgba(15, 23, 42, 0.16);
+    border-radius: 999px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 18px;
+    margin-bottom: 18px;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.auth-field:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(15, 76, 129, 0.10);
+    transform: translateY(-1px);
+}
+
+.auth-field svg {
+    width: 18px;
+    height: 18px;
+    color: #9ca3af;
+    flex-shrink: 0;
+}
+
+.auth-field input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #111827;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 150%;
+}
+
+.auth-field input::placeholder {
+    color: #a8b0ba;
+}
+
+/*
+    Submit button is the primary login action.
+    The filled blue style matches the supplied UX while using site colors.
+*/
+.auth-submit {
+    height: 50px;
+    border-radius: 999px;
+    background: #147DE8;
+    color: #ffffff;
+    font-weight: 800;
+    margin-top: 6px;
+    box-shadow: 0 14px 24px rgba(20, 125, 232, 0.22);
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.auth-submit:hover {
+    background: #0F68C5;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 30px rgba(20, 125, 232, 0.30);
+}
+
+/*
+    Forgot password link is intentionally subtle.
+    It stays available without competing with the main submit button.
+*/
+.auth-forgot {
+    align-self: flex-start;
+    color: #4b5563;
+    font-size: 13px;
+    line-height: 150%;
+    margin-top: 18px;
+}
+
+.auth-forgot:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+/* ── CRISIS CENTRE PAGE ── */
+/*
+    Crisis centre page uses a calm background with strong red emergency cues.
+    The generous vertical spacing helps the urgent content stay readable.
+*/
+.crisis-main {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F8FBFD 58%, #EEF4F8 100%);
+    padding: 68px 24px 74px;
+}
+
+/*
+    Main crisis page shell aligns with the global 1280px layout width.
+    This keeps the page consistent with header, footer, and other pages.
+*/
+.crisis-centre-shell {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/*
+    Crisis hero centers the key message and emergency action.
+    The icon makes the page purpose clear before the user reads the title.
+*/
+.crisis-centre-hero {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 58px;
+}
+
+.crisis-alert-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #FEE2E2;
+    color: #DC2626;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+}
+
+.crisis-alert-icon svg {
+    width: 30px;
+    height: 30px;
+}
+
+.crisis-centre-hero h1 {
+    font-weight: 800;
+    font-size: 46px;
+    line-height: 121%;
+    text-transform: uppercase;
+    color: #1a202c;
+    margin-bottom: 18px;
+}
+
+.crisis-centre-hero p {
+    color: #64748b;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 150%;
+    margin-bottom: 22px;
+}
+
+/*
+    Live chat CTA is the strongest action on the page.
+    The red fill communicates urgency while the rounded shape stays friendly.
+*/
+.crisis-live-chat {
+    width: min(100%, 440px);
+    min-height: 48px;
+    margin: 0 auto;
+    border-radius: 999px;
+    background: #DC2626;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 24px;
+    font-weight: 800;
+    box-shadow: 0 14px 28px rgba(220, 38, 38, 0.22);
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.crisis-live-chat svg {
+    width: 19px;
+    height: 19px;
+}
+
+.crisis-live-chat:hover {
+    background: #B91C1C;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(220, 38, 38, 0.30);
+}
+
+/*
+    Divider labels the hotline section without creating a heavy heading.
+    The horizontal lines echo the simple UX structure from the reference.
+*/
+.crisis-divider {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 14px;
+    color: #94a3b8;
+    font-size: 17px;
+    margin-bottom: 28px;
+}
+
+.crisis-divider::before,
+.crisis-divider::after {
+    content: "";
+    height: 1px;
+    background: rgba(15, 23, 42, 0.14);
+}
+
+/*
+    Results label shows the country context for the visible hotline list.
+    It sits outside the panel to keep filtering context separate from results.
+*/
+.crisis-results-label {
+    color: #64748b;
+    font-size: 16px;
+    line-height: 150%;
+    margin-bottom: 26px;
+}
+
+.crisis-results-label strong {
+    color: #334155;
+    font-weight: 800;
+}
+
+/*
+    Hotline panel groups emergency contacts into a single focused area.
+    The panel uses white space and borders to stay calm despite urgent content.
+*/
+.crisis-hotline-panel {
+    background: #ffffff;
+    border: 1px solid rgba(15, 76, 129, 0.12);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 28px;
+}
+
+/*
+    Each hotline row provides an icon, text content, and direct call action.
+    The layout mirrors other list cards while emphasizing emergency clarity.
+*/
+.crisis-hotline-card {
+    display: grid;
+    grid-template-columns: 56px 1fr 150px;
+    align-items: center;
+    gap: 22px;
+    border-radius: 10px;
+    padding: 22px;
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.crisis-hotline-card + .crisis-hotline-card {
+    margin-top: 22px;
+}
+
+.crisis-hotline-card:hover {
+    background: #FEF2F2;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(220, 38, 38, 0.08);
+}
+
+/*
+    Hotline icons make each row easier to scan.
+    The red-tinted surface communicates urgency without overwhelming the text.
+*/
+.crisis-hotline-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: #FEE2E2;
+    color: #DC2626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crisis-hotline-icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+/*
+    Hotline copy keeps the service name, phone, and description grouped.
+    The red phone number is intentionally prominent for quick action.
+*/
+.crisis-hotline-content h2 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 130%;
+    color: #111827;
+    margin-bottom: 2px;
+}
+
+.crisis-phone {
+    display: inline-block;
+    color: #DC2626;
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 135%;
+    margin-bottom: 4px;
+}
+
+.crisis-phone:hover {
+    color: #B91C1C;
+    text-decoration: underline;
+}
+
+.crisis-hotline-content p {
+    color: #334155;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 145%;
+}
+
+/*
+    Call buttons are direct telephone links styled as clear actions.
+    Fixed sizing keeps all emergency rows visually consistent.
+*/
+.crisis-call-btn {
+    width: 132px;
+    height: 42px;
+    justify-self: center;
+    border: 1px solid rgba(220, 38, 38, 0.28);
+    border-radius: 8px;
+    background: #ffffff;
+    color: #B91C1C;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.crisis-call-btn:hover {
+    background: #DC2626;
+    border-color: #DC2626;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* ── GLOBAL CRISIS POPUP ── */
+/*
+    Floating crisis button keeps emergency support available on every page.
+    Its fixed position makes it reachable without adding another nav item.
+*/
+.crisis-floating-btn {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1250;
+    min-height: 48px;
+    border-radius: 999px;
+    background: #DC2626;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 0 18px;
+    font-weight: 800;
+    box-shadow: 0 18px 34px rgba(220, 38, 38, 0.28);
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.crisis-floating-btn svg {
+    width: 19px;
+    height: 19px;
+}
+
+.crisis-floating-btn:hover {
+    background: #B91C1C;
+    transform: translateY(-2px);
+    box-shadow: 0 22px 40px rgba(220, 38, 38, 0.36);
+}
+
+/*
+    Popup overlay dims the page and centers the crisis contact panel.
+    The hidden state keeps it out of view until JavaScript opens it.
+*/
+.crisis-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1300;
+    background: rgba(15, 23, 42, 0.56);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+}
+
+.crisis-popup-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/*
+    Crisis popup panel contains the live chat action and the contact list.
+    The max height allows scrolling on short screens without losing content.
+*/
+.crisis-popup {
+    position: relative;
+    width: min(100%, 680px);
+    max-height: min(760px, calc(100vh - 48px));
+    overflow-y: auto;
+    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid rgba(220, 38, 38, 0.14);
+    box-shadow: 0 28px 70px rgba(15, 23, 42, 0.28);
+    padding: 32px;
+    transform: translateY(10px) scale(0.98);
+    transition: transform .2s ease;
+}
+
+.crisis-popup-overlay.open .crisis-popup {
+    transform: translateY(0) scale(1);
+}
+
+/*
+    Popup close button stays in the top-right corner.
+    A circular control makes the dismissal affordance immediately familiar.
+*/
+.crisis-popup-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #F8FAFC;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s ease, color .2s ease;
+}
+
+.crisis-popup-close svg {
+    width: 20px;
+    height: 20px;
+}
+
+.crisis-popup-close:hover {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+/*
+    Popup header frames the emotional support message and live chat action.
+    Center alignment keeps the urgent message calm and easy to scan.
+*/
+.crisis-popup-header {
+    text-align: center;
+    padding: 8px 34px 24px;
+}
+
+.crisis-popup-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #FEE2E2;
+    color: #DC2626;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.crisis-popup-icon svg {
+    width: 29px;
+    height: 29px;
+}
+
+.crisis-popup-header h2 {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 120%;
+    color: #111827;
+    margin-bottom: 10px;
+}
+
+.crisis-popup-header p {
+    color: #64748b;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 150%;
+    margin: 0 auto 18px;
+    max-width: 520px;
+}
+
+/*
+    Live chat inside the popup is the primary immediate support action.
+    The pill shape mirrors other urgent CTAs on the site.
+*/
+.crisis-popup-chat {
+    min-height: 44px;
+    border-radius: 999px;
+    background: #DC2626;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 10px 22px;
+    font-weight: 800;
+    box-shadow: 0 12px 24px rgba(220, 38, 38, 0.20);
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.crisis-popup-chat svg {
+    width: 18px;
+    height: 18px;
+}
+
+.crisis-popup-chat:hover {
+    background: #B91C1C;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(220, 38, 38, 0.28);
+}
+
+/*
+    Crisis contact list stacks three contact cards in a compact dropdown style.
+    Each contact remains visually separate while sharing one modal surface.
+*/
+.crisis-popup-list {
+    display: grid;
+    gap: 12px;
+}
+
+.crisis-popup-contact {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 12px;
+    background: #F8FAFC;
+    border: 1px solid rgba(15, 76, 129, 0.08);
+}
+
+.crisis-popup-contact-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #FEE2E2;
+    color: #DC2626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crisis-popup-contact-icon svg {
+    width: 23px;
+    height: 23px;
+}
+
+.crisis-popup-contact h3 {
+    font-family: 'Source Sans 3', sans-serif;
+    color: #111827;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 130%;
+    margin-bottom: 2px;
+}
+
+.crisis-popup-contact a {
+    display: inline-block;
+    color: #DC2626;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 135%;
+    margin-bottom: 4px;
+}
+
+.crisis-popup-contact a:hover {
+    color: #B91C1C;
+    text-decoration: underline;
+}
+
+.crisis-popup-contact p {
+    color: #334155;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 145%;
+}
+
+/* ── FOOTER ── */
+/*
+    Footer section background and typography settings.
+    It creates a dark contrast area at the bottom of the page.
+*/
+.site-footer {
+    background: #0F172A;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 80px 24px 0;
+}
+
+/*
+    Footer grid arranges brand and links in columns.
+    The layout adapts as screen width changes in later media queries.
+*/
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/*
+    Brand section text sizing in the footer.
+    It keeps the company summary readable at smaller widths.
+*/
+.footer-brand {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.footer-brand .logo {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.footer-brand p {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 300px;
+    line-height: 1.6;
+}
+
+/*
+    Footer link column headings for each group.
+    These headings are bright and easy to scan.
+*/
+.footer-col h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+}
+
+/*
+    Footer links are stacked vertically and use subtle color.
+    Hovering shifts the text slightly for a lightweight effect.
+*/
+.footer-col a {
+    display: block;
+    font-size: 15px;
+    padding: 6px 0;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color .2s, transform .2s;
+}
+
+.footer-col a:hover {
+    color: #60A5FA;
+    transform: translateX(4px);
+}
+
+/*
+    Social icon container aligns circular icons in a row.
+    The spacing lets each icon breathe independently.
+*/
+.social-icons {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.social-icons a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s;
+}
+
+.social-icons a:hover {
+    background: var(--primary);
+    transform: translateY(-3px);
+}
+
+.social-icons svg {
+    width: 18px;
+    height: 18px;
+    fill: #fff;
+    display: block;
+}
+
+/*
+    Footer bottom row displays copyright and policy links.
+    It is flexible so it can wrap nicely on smaller screens.
+*/
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 60px;
+    padding: 24px 0;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.footer-bottom span {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 24px;
+}
+
+.footer-bottom-links a {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color .2s;
+}
+
+.footer-bottom-links a:hover {
+    color: #60A5FA;
+}
+
+/* ───────────────── RESPONSIVE ───────────────── */
+
+/*
+    Large laptops: slightly reduce hero spacing and move footer layout.
+    This keeps the page visually balanced at wide but not massive widths.
+*/
+@media (max-width:1200px) {
+    .hero-inner {
+        gap: 60px;
+    }
+
+    .hero-text h1 {
+        font-size: clamp(34px, 4vw, 48px);
+    }
+
+    .hero-img-wrap img {
+        max-width: 380px;
+    }
+
+    .help-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .forum-post {
+        grid-template-columns: 170px 1fr 130px;
+    }
+
+    .forum-post-image {
+        width: 170px;
+    }
+
+    .support-card {
+        grid-template-columns: 240px 1fr 140px;
+        gap: 26px;
+    }
+
+    .support-photo-wrap {
+        width: 240px;
+    }
+
+    .crisis-hotline-card {
+        grid-template-columns: 56px 1fr 132px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+}
+
+/*
+    iPad landscape and large tablets switch the hero to a grid layout.
+    This avoids overly wide hero text and improves horizontal balance.
+*/
+@media (min-width:768px) and (max-width:1024px) {
+    .hero {
+        min-height: auto;
+        padding: 120px 40px 80px;
+    }
+
+    .hero-inner {
+        display: grid;
+        grid-template-columns: 55% 45%;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .hero-text h1 {
+        font-size: 42px;
+        line-height: 1.1;
+    }
+
+    .hero-text p {
+        font-size: 17px;
+        white-space: normal;
+    }
+
+    .hero-img-wrap img {
+        width: 100%;
+        max-width: 450px;
+    }
+
+    .crisis-banner {
+        max-width: 95%;
+    }
+
+    .help-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .support-filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .support-search-btn {
+        grid-column: span 2;
+    }
+
+    .crisis-hotline-card {
+        grid-template-columns: 56px 1fr;
+    }
+
+    .crisis-call-btn {
+        grid-column: 2;
+        justify-self: start;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+}
+
+/*
+    Tablet portrait layout stacks the hero vertically.
+    It also simplifies the crisis banner and footer structure.
+*/
+@media (max-width:900px) {
+    .hero {
+        min-height: auto;
+        padding: 110px 24px 60px;
+    }
+
+    .hero-inner {
+        display:flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .hero-text {
+        align-items: center;
+    }
+
+    .hero-text p {
+        white-space: normal;
+        max-width: 600px;
+        margin: 0 auto 32px;
+    }
+
+    .hero-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .hero-img-wrap {
+        margin-top: 0;
+    }
+
+    .hero-img-wrap img {
+        max-width: 380px;
+    }
+
+    .btn-outline {
+        margin: 0 auto;
+    }
+
+    .crisis-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px;
+        gap: 20px;
+    }
+
+    .help-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .forum-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .forum-post {
+        grid-template-columns: 150px 1fr 110px;
+        gap: 20px;
+    }
+
+    .forum-post-image {
+        width: 150px;
+        height: 110px;
+    }
+
+    .support-heading {
+        margin-bottom: 48px;
+    }
+
+    .support-filters {
+        margin-bottom: 42px;
+    }
+
+    .support-card {
+        grid-template-columns: 190px 1fr;
+        gap: 22px;
+    }
+
+    .support-photo-wrap {
+        width: 190px;
+        height: 150px;
+    }
+
+    .support-view-btn {
+        grid-column: 2;
+        justify-self: start;
+    }
+
+    .crisis-main {
+        padding: 54px 24px 62px;
+    }
+
+    .crisis-centre-hero {
+        margin-bottom: 44px;
+    }
+
+    .crisis-hotline-panel {
+        padding: 18px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .site-footer {
+        text-align: center;
+    }
+}
+
+/*
+    Large phones further compress spacing and stack content.
+    The footer and card layouts become single-column for easier reading.
+*/
+@media (max-width:768px) {
+    .hero {
+        padding: 100px 20px 50px;
+    }
+
+    .hero-inner {
+        gap: 32px;
+    }
+
+    .hero-text h1 {
+        font-size: 36px;
+    }
+
+    .hero-text p {
+        font-size: 16px;
+    }
+
+    .hero-img-wrap img {
+        max-width: 320px;
+    }
+
+    .help-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .forum-main {
+        padding: 30px 20px;
+    }
+
+    .forum-title {
+        font-size: 36px;
+    }
+
+    .forum-composer {
+        padding: 20px;
+    }
+
+    .forum-composer-row {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .forum-post-field {
+        min-height: 96px;
+    }
+
+    .forum-post-btn {
+        width: 100%;
+    }
+
+    .forum-category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .forum-posts {
+        padding: 16px;
+    }
+
+    .forum-post {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        min-height: auto;
+    }
+
+    .forum-post-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/8;
+    }
+
+    .forum-view-btn {
+        justify-self: stretch;
+        width: 100%;
+    }
+
+    .support-main {
+        padding: 42px 20px 54px;
+    }
+
+    .auth-card {
+        min-height: auto;
+        padding: 38px 36px;
+    }
+
+    .auth-card h1 {
+        font-size: 28px;
+        margin-bottom: 56px;
+    }
+
+    .support-heading h1 {
+        font-size: 36px;
+    }
+
+    .support-filters {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .support-search-btn {
+        grid-column: auto;
+    }
+
+    .support-results {
+        padding: 16px;
+    }
+
+    .support-card {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 14px;
+    }
+
+    .support-photo-wrap {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+
+    .support-view-btn {
+        grid-column: auto;
+        justify-self: stretch;
+        width: 100%;
+    }
+
+    .crisis-main {
+        padding: 42px 20px 54px;
+    }
+
+    .crisis-centre-hero h1 {
+        font-size: 36px;
+    }
+
+    .crisis-centre-hero p {
+        font-size: 16px;
+    }
+
+    .crisis-divider {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .crisis-divider::before,
+    .crisis-divider::after {
+        display: none;
+    }
+
+    .crisis-hotline-card {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .crisis-hotline-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .crisis-call-btn {
+        grid-column: auto;
+        justify-self: stretch;
+        width: 100%;
+    }
+
+    .crisis-floating-btn {
+        right: 18px;
+        bottom: 18px;
+    }
+
+    .crisis-popup {
+        padding: 26px;
+    }
+
+    .crisis-popup-header {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+/*
+    Mobile screens reduce padding and center important calls to action.
+    The footer links stack vertically for easier thumb navigation.
+*/
+@media (max-width:480px) {
+    .navbar {
+        padding: 0 16px;
+    }
+
+    .hero {
+        padding: 90px 20px 40px;
+    }
+
+    .hero-text h1 {
+        font-size: 30px;
+    }
+
+    .hero-text p {
+        font-size: 15px;
+    }
+
+    /* --- ADDED FIXES FOR HERO STACKING --- */
+    .hero-features {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .hero-buttons a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+    /* ------------------------------------- */
+
+    .hero-img-wrap img {
+        max-width: 260px;
+    }
+
+    .forum-title {
+        font-size: 30px;
+    }
+
+    .forum-info-card {
+        padding: 20px;
+    }
+
+    .forum-category-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .support-heading h1 {
+        font-size: 30px;
+    }
+
+    .support-results {
+        padding: 12px;
+    }
+
+    .support-card-content h2 {
+        font-size: 18px;
+    }
+
+    .auth-main {
+        padding: 20px;
+    }
+
+    .auth-card {
+        border-radius: 24px;
+        padding: 32px 24px;
+    }
+
+    .auth-card h1 {
+        font-size: 25px;
+        margin-bottom: 42px;
+    }
+
+    .auth-brand {
+        font-size: 21px;
+    }
+
+    .crisis-centre-hero h1 {
+        font-size: 30px;
+    }
+
+    .crisis-live-chat {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .crisis-hotline-panel {
+        padding: 12px;
+    }
+
+    .crisis-hotline-card {
+        padding: 16px;
+    }
+
+    .crisis-hotline-content h2 {
+        font-size: 18px;
+    }
+
+    .crisis-phone {
+        font-size: 17px;
+    }
+
+    .crisis-floating-btn {
+        width: 52px;
+        height: 52px;
+        padding: 0;
+    }
+
+    .crisis-floating-btn span {
+        display: none;
+    }
+
+    .crisis-popup-overlay {
+        padding: 14px;
+    }
+
+    .crisis-popup {
+        border-radius: 14px;
+        padding: 22px 16px 16px;
+    }
+
+    .crisis-popup-close {
+        top: 12px;
+        right: 12px;
+    }
+
+    .crisis-popup-header {
+        padding: 8px 22px 20px;
+    }
+
+    .crisis-popup-header h2 {
+        font-size: 24px;
+    }
+
+    .crisis-popup-chat {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .crisis-popup-contact {
+        grid-template-columns: 1fr;
+    }
+
+    .crisis-banner {
+        padding: 20px;
+    }
+
+    .btn-crisis {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .footer-bottom-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/*
+    Very narrow phones need a smaller auth title to keep it on one line.
+    This preserves the login card shape without horizontal overflow.
+*/
+@media (max-width:360px) {
+    .auth-card h1 {
+        font-size: 21px;
+    }
+}
+
+/*
+    Tablet-specific fix for iPad-like aspect ratios.
+    It hides desktop nav links and keeps the hamburger visible.
+*/
+@media(max-width:1200px) and (max-height:1400px) {
+    .nav-left,
+    .nav-right {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex !important;
+    }
+}
+
+/*
+    CTA fix for devices with moderate width and tall height.
+    It preserves crisis banner spacing in unusual screen shapes.
+*/
+@media (min-width: 600px) and (min-height: 200px) {
+    .crisis-section {
+        padding: 0 0 80px;
+        margin-bottom: -60px;
+    }
+
+    .crisis-banner {
+        width: 90%;
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 28px 32px;
+    }
+
+    .crisis-left {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 18px;
+        flex: 1;
+    }
+
+    .btn-crisis {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+
+    .crisis-bar {
+        min-height: 52px;
+    }
+
+    .text-align-tablet {
+        text-align: left;
+    }
+}
+
+/* Tablets and small screens */
+@media (max-width: 768px) {
+    .support-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+}
+
+/* Mobile Phones */
+@media (max-width: 480px) {
+    .support-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Hamburgar Menu for very small screens /*
+/* Fix for very narrow or short screens to prevent mobile menu scrolling.
+    Compresses padding, font sizes, and overall drawer width.
+*/
+@media (max-width: 360px), (max-height: 660px) {
+    .mobile-menu {
+        width: 280px; 
+        padding: 0 20px 20px;
+    }
+
+    .mobile-menu-header {
+        padding: 16px 0 12px;
+        margin-bottom: 8px;
+    }
+
+    .mobile-menu-logo {
+        font-size: 20px;
+    }
+
+    .mobile-link {
+        padding: 12px 0;
+        font-size: 16px;
+    }
+
+    .mobile-actions {
+        padding-top: 16px;
+        gap: 12px;
+    }
+
+    .mobile-actions .register-mobile {
+        padding: 8px;
+    }
+
+    .mobile-actions .btn-primary {
+        padding: 10px 16px;
+    }
+}
+
+/* 1. Switch to Mobile Nav below 1000px */
+@media(max-width: 1000px) {
+    .nav-left,
+    .nav-right {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex !important;
+    }
+}
+
+/* 2. Squish Mobile Menu for very short/narrow screens */
+@media (max-width: 360px), (max-height: 660px) {
+    .mobile-menu {
+        width: 280px; 
+        padding: 0 20px 20px;
+    }
+
+    .mobile-menu-header {
+        padding: 16px 0 12px;
+        margin-bottom: 8px;
+    }
+
+    .mobile-menu-logo {
+        font-size: 20px;
+    }
+
+    .mobile-link {
+        padding: 12px 0;
+        font-size: 16px;
+    }
+
+    .mobile-actions {
+        padding-top: 16px;
+        gap: 12px;
+    }
+
+    .mobile-actions .register-mobile {
+        padding: 8px;
+    }
+
+    .mobile-actions .btn-primary {
+        padding: 10px 16px;
+    }
+}

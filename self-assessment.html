@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Assessment – MindBridge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="styles/styles.css" rel="stylesheet">
+    <link href="styles/assessment.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <nav class="navbar" id="navbar" aria-label="Main navigation">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">MindBridge</a>
+            <div class="nav-left" role="menubar">
+                <a href="index.html">Home</a>
+                <a href="self-assessment.html">Self-Assessment</a>
+                <a href="resource-library.html">Resource Library</a>
+                <a href="mood-tracker.html">Mood Tracker</a>
+                <a href="find-support.html">Find Support</a>
+                <a href="community-forum.html">Community Forum</a>
+            </div>
+            <div class="nav-right">
+                <span class="nav-divider"></span>
+                <a href="register.html" class="register" id="navRegister">Register</a>
+                <a href="login.html" class="login-btn" id="navLogin">Log In</a>
+            </div>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileMenu()">
+                <span class="menu-icon">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/>
+                    </svg>
+                </span>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+        <div class="mobile-menu-header">
+            <span class="mobile-menu-logo">MindBridge</span>
+            <button class="mobile-close" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M6 6l12 12"/><path d="M18 6L6 18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="mobile-menu-scroll">
+            <a href="index.html" class="mobile-link">Home</a>
+            <a href="self-assessment.html" class="mobile-link">Self-Assessment</a>
+            <a href="resource-library.html" class="mobile-link">Resource Library</a>
+            <a href="mood-tracker.html" class="mobile-link">Mood Tracker</a>
+            <a href="find-support.html" class="mobile-link">Find Support</a>
+            <a href="community-forum.html" class="mobile-link">Community Forum</a>
+        </div>
+        <div class="mobile-actions">
+            <a href="register.html" class="register-mobile">Register</a>
+            <a href="login.html" class="btn-primary">Log In</a>
+        </div>
+    </div>
+    <br><br>
+<main class="assessment-page">
+  <div class="assessment-container">
+    <!-- Guest notice -->
+    <div class="guest-banner" id="guestBanner" style="display:none">
+      ⚠️ You're not logged in. Your results won't be saved. <a href="login.html">Log in</a> or <a href="register.html">register</a> to track your history.
+    </div>
+
+    <div class="assessment-header">
+      <h1>Self-Assessment</h1>
+      <p>Complete the following questionnaire to evaluate your mental well-being. Your responses are confidential and secure.</p>
+    </div>
+
+    <!-- Step track -->
+    <div class="step-track" id="stepTrack">
+      <div class="step-node"><div class="step-circle active" id="s1">1</div><span class="step-label active" id="sl1">Depression</span></div>
+      <div class="step-line" id="line1"></div>
+      <div class="step-node"><div class="step-circle" id="s2">2</div><span class="step-label" id="sl2">Anxiety</span></div>
+      <div class="step-line" id="line2"></div>
+      <div class="step-node"><div class="step-circle" id="s3">3</div><span class="step-label" id="sl3">Well-being</span></div>
+      <div class="step-line" id="line3"></div>
+      <div class="step-node"><div class="step-circle" id="s4">4</div><span class="step-label" id="sl4">Results</span></div>
+    </div>
+
+    <div class="assessment-body">
+      <div>
+        <!-- Question card -->
+        <div class="question-card" id="questionCard">
+          <div class="question-meta" id="qMeta">Question 1 of 9 · PHQ-9</div>
+          <div class="prog-bar-wrap"><div class="prog-bar-fill" id="progFill" style="width:0%"></div></div>
+          <p class="question-text" id="qText"></p>
+          <div class="options-list" id="optList"></div>
+          <div class="q-nav">
+            <button class="btn-prev" id="btnPrev">← Back</button>
+            <button class="btn-next" id="btnNext" onclick="nextQ()" disabled>Next →</button>
+        </div>
+      </div>
+
+
+        <!-- Results -->
+        <div class="results-panel" id="resultsPanel">
+          <h2>Your Assessment Results</h2>
+          <p>Based on your responses to the PHQ-9 screening.</p>
+          <div class="score-row">
+            <div class="score-circle"><span class="score-num" id="scoreNum">—</span><span class="score-max">/ 27</span></div>
+            <div class="score-desc"><strong id="scoreLabel">—</strong><p id="scoreDetail">—</p></div>
+          </div>
+          <div class="results-note" id="savedNote"></div>
+          <p class="results-note">⚠️ This assessment is not a substitute for professional medical advice, diagnosis, or treatment.</p>
+          <div class="results-actions">
+            <button class="btn-next" id="retakeBtn">Retake Assessment</button>
+            <button class="btn-outline-p" id="supportBtn">Find Professional Support</button>
+          </div>
+        </div>
+
+        <!-- History -->
+        <div class="history-section" id="historySection" style="display:none">
+          <h2>Your Assessment History</h2>
+          <div id="historyContent"></div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+
+        <div class="sidebar-card tools-card">
+            <div class="sidebar-title">
+                <span class="sidebar-icon">🧠</span>
+                <div>
+                    <h3>Assessment Tools</h3>
+                    <p>Screening methods used</p>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <span class="tool-badge">PHQ-9</span>
+                <div class="tool-info">
+                    <strong>Depression Screening</strong>
+                    <span>9 questions · around 3 minutes</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <span class="tool-badge">GAD-7</span>
+                <div class="tool-info">
+                    <strong>Anxiety Screening</strong>
+                    <span>7 questions · around 2 minutes</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-card progress-card">
+            <div class="sidebar-title">
+                <span class="sidebar-icon">🌿</span>
+                <div>
+                    <h3>Your Progress</h3>
+                    <p>Track your current assessment</p>
+                </div>
+            </div>
+
+            <div class="progress-info">
+                <span id="sideProgressText">Question 1 of 16</span>
+                <strong id="sideProgressPercent">0%</strong>
+            </div>
+
+            <div class="side-progress-bar">
+                <div class="side-progress-fill" id="sideProgressFill"></div>
+            </div>
+
+            <ul class="progress-list">
+                <li>✔ Depression section</li>
+                <li>○ Anxiety section</li>
+                <li>○ Result summary</li>
+            </ul>
+        </div>
+
+        <div class="sidebar-card why-card">
+            <div class="sidebar-title">
+                <span class="sidebar-icon">💙</span>
+                <div>
+                    <h3>Why Take This?</h3>
+                    <p>Small steps can help you understand yourself better</p>
+                </div>
+            </div>
+
+            <ul class="why-list">
+                <li>Understand your current mood</li>
+                <li>Notice early warning signs</li>
+                <li>Track changes over time</li>
+                <li>Find suitable support resources</li>
+            </ul>
+        </div>
+
+        <div class="important-card modern-important">
+            <div class="sidebar-title">
+                <span class="sidebar-icon">⚠️</span>
+                <div>
+                    <h3>Important Notice</h3>
+                    <p>Please read before continuing</p>
+                </div>
+            </div>
+
+            <p>This assessment is not a substitute for professional medical advice, diagnosis, or treatment.</p>
+        </div>
+
+        <div class="sidebar-card user-status-card" id="userCard" style="display:none">
+            <div class="sidebar-title">
+                <span class="sidebar-icon">👤</span>
+                <div>
+                    <h3>Logged In As</h3>
+                    <p>Your result history will be saved</p>
+                </div>
+            </div>
+
+            <p id="userCardName" class="user-card-name"></p>
+            <a href="login.html" class="sidebar-logout" onclick="doLogout(event)">Log out</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <span class="logo">MindBridge</span>
+                <p>Our vision is to provide convenience and help increase your mental well-being.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                    <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                    <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-col"><h4>About</h4><a href="#">How it works</a><a href="#">Featured</a><a href="#">Partnership</a><a href="#">Business Relation</a></div>
+            <div class="footer-col"><h4>Community</h4><a href="#">Events</a><a href="#">Blog</a><a href="#">Podcast</a><a href="#">Invite a friend</a></div>
+            <div class="footer-col"><h4>Socials</h4><a href="#">Discord</a><a href="#">Instagram</a><a href="#">Twitter</a><a href="#">Facebook</a></div>
+        </div>
+        <div class="footer-bottom">
+            <span>©2026 MindBridge. All rights reserved.</span>
+            <div class="footer-bottom-links"><a href="#">Privacy &amp; Policy</a><a href="#">Terms &amp; Condition</a></div>
+        </div>
+    </footer>
+<script src="js/scripts.js"></script>
+<script src="js/assessment.js"></script>
+</body>
+</html>

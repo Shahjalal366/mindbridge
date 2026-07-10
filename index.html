@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en" style="height:100%">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindBridge - Youth Mental Health Support</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="styles/styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar" aria-label="Main navigation">
+        <div class="nav-inner">
+
+            <a href="index.html" class="nav-logo" aria-label="MindBridge Home">MindBridge</a>
+
+            <!-- The default navigation items on large screens -->
+            <div class="nav-left" role="menubar">
+                <a href="index.html" role="menuitem">Home</a>
+                <a href="self-assessment.html" role="menuitem">Self-Assessment</a>
+                <a href="resource-library.html" role="menuitem">Resource Library</a>
+                <a href="mood-tracker.html" role="menuitem">Mood Tracker</a>
+                <a href="find-support.html" role="menuitem">Find Support</a>
+                <a href="community-forum.html" role="menuitem">Community Forum</a>
+            </div>
+
+            <div class="nav-right">
+
+                <span class="nav-divider"></span>
+
+                <a href="register.html" class="register" id="navRegister">
+                    Register
+                </a>
+
+                <a href="login.html" class="login-btn" id="navLogin">
+                    Log In
+                </a>
+
+            </div>
+
+            <!-- The hamburger menu is hidden by default and only displayed on smaller screens -->
+            <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false"
+                onclick="toggleMobileMenu()">
+                <span class="menu-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
+                        <path d="M4 7h16" />
+                        <path d="M4 12h16" />
+                        <path d="M4 17h16" />
+                    </svg>
+                </span>
+            </button>
+
+        </div>
+    </nav>
+
+    <!-- After the media query shows the hamburger menu, the onclick function
+handles the opening and closing of the navbar -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+        <div class="mobile-menu-header">
+            <span class="mobile-menu-logo">MindBridge</span>
+            <button class="mobile-close" aria-label="Close menu" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round">
+                    <path d="M6 6l12 12" />
+                    <path d="M18 6L6 18" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Items -->
+        <div style="flex-grow:1;overflow-y:auto">
+            <a href="index.html" class="mobile-link">Home</a>
+            <a href="self-assessment.html" class="mobile-link">Self-Assessment</a>
+            <a href="resource-library.html" class="mobile-link">Resource Library</a>
+            <a href="mood-tracker.html" class="mobile-link">Mood Tracker</a>
+            <a href="find-support.html" class="mobile-link">Find Support</a>
+            <a href="community-forum.html" class="mobile-link">Community Forum</a>
+        </div>
+
+        <div class="mobile-actions">
+            <a href="register.html" class="register-mobile">Register</a>
+            <a href="login.html" class="btn-primary" style="text-align:center;justify-content:center">Log In</a>
+        </div>
+    </div>
+
+    <br><br><br>
+    <!-- Hero Section for setting the stage -->
+    <section class="hero" aria-labelledby="heroHeading">
+        <div class="hero-inner container">
+            <div class="hero-text">
+                <h1 id="heroHeading">Your Mental <br>Wellbeing Matters</h1>
+                <p id="heroSub">MindBridge is here to support you. You are not alone.</p>
+                <div class="hero-features">
+
+                    <div class="hero-feature">
+                        ✓ Free PHQ-9 & GAD-7 Assessment
+                    </div>
+
+                    <div class="hero-feature">
+                        ✓ Daily Mood Tracking
+                    </div>
+
+                    <div class="hero-feature">
+                        ✓ Trusted Mental Health Resources
+                    </div>
+
+                    <div class="hero-feature">
+                        ✓ Professional Support Directory
+                    </div>
+
+                </div>
+                <div class="hero-buttons">
+
+                    <a href="self-assessment.html" class="btn-primary">
+                        Get Started
+                    </a>
+
+                    <a href="resource-library.html" class="btn-outline">
+                        Learn More
+                    </a>
+
+                </div>
+
+                <div class="hero-stats">
+
+                    <div>
+                        <strong>1,500+</strong>
+                        <span>Students Supported</span>
+                    </div>
+
+                    <div>
+                        <strong>24/7</strong>
+                        <span>Crisis Resources</span>
+                    </div>
+
+                    <div>
+                        <strong>100%</strong>
+                        <span>Private & Secure</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="hero-img-wrap" style="transition-delay:.12s">
+                <img src="https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?auto=format&fit=crop&w=900&h=700&q=80"
+                    alt="Two friends supporting each other" />
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Crisis Hotline Section -->
+    <div class="crisis-section">
+        <div class="crisis-banner">
+            <div class="crisis-left">
+                <div class="crisis-bar"></div>
+                <div class="crisis-text">
+                    <strong class="text-align-tablet">Crisis Hotline : 1-800-273-485</strong>
+                    <span>If you are in crisis or need help, reach out to our 24/7 support line.</span>
+                </div>
+            </div>
+            <button class="btn-crisis"><a href="crisis.html" class="btn-crisis">Get Help Now</a></button>
+        </div>
+    </div>
+
+    <!-- aria attributes are used across some elements to increase accessibility 
+    for assitive technologies-->
+    <section class="help-section" aria-labelledby="helpHeading">
+        <h2 id="helpHeading">How can we help you?</h2>
+
+        <!-- Container that holds all the help cards -->
+        <a href="self-assessment.html">
+            <div class="help-grid">
+                <div class="help-card">
+                    <div class="help-card-top">
+                        <h4>Self-Awareness</h4>
+                        <!-- 'this' parameter works for a single element with the same class. For multiple elements with the same class like in this case, 
+                    hearts for each card's, it's use becomes mandatory. -->
+                        <button class="heart-btn" aria-label="Save Self-Awareness"
+                            onclick=" event.preventDefault(); event.stopPropagation(); toggleHeart(this);">
+                            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="help-card-img">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&h=450&q=80"
+                            alt="Woman practicing mindfulness" onerror="this.style.display='none'" />
+                    </div>
+                    <p>PHQ-9 &amp; GAD-7 screenings adapted for youth. Results include a disclaimer: not a clinical
+                        diagnosis</p>
+                </div>
+        </a>
+
+        <a href="community-forum.html"> <!-- Container that holds the Peer Connection help card -->
+            <div class="help-card" style="transition-delay:.08s">
+                <!-- This only holds the Self-Awareness and the heart in a row-->
+                <div class="help-card-top">
+                    <h4>Peer Connection</h4>
+                    <!-- the heart is in fact a button -->
+                    <button class="heart-btn" aria-label="Save Peer Connection"
+                        onclick="event.preventDefault(); event.stopPropagation(); toggleHeart(this);">
+                        <!-- <svg> represents the canvas in which the heart icon is drawn -->
+                        <!-- stroke="currentColor" is taken from styles.css-->
+                        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <!-- Represents the instruction for the heart icon -->
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="help-card-img">
+                    <!-- onerror attribute hides the image if it fails to load -->
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&h=450&q=80"
+                        alt="Friends supporting each other" onerror="this.style.display='none'" />
+                </div>
+                <p>Moderated forum with topic threads, upvote system, and AI-assisted content flagging for safety.</p>
+            </div>
+        </a>
+
+        <a href="mood-tracker.html">
+            <div class="help-card" style="transition-delay:.16s">
+                <div class="help-card-top">
+                    <h4>Private Mood Tracking</h4>
+                    <button class="heart-btn" aria-label="Save Private Mood Tracking"
+                        onclick=" event.preventDefault(); event.stopPropagation(); toggleHeart(this)">
+                        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="help-card-img">
+                    <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&h=450&q=80"
+                        alt="Person writing notes in a journal" onerror="this.style.display='none'" />
+                </div>
+                <p>Log daily emotions, view trend graphs, add journal entries. All data is private to you.</p>
+            </div>
+        </a>
+
+        <a href="find-support.html">
+            <div class="help-card" style="transition-delay:.24s">
+                <div class="help-card-top">
+                    <h4>Professional Pathways</h4>
+                    <button class="heart-btn" aria-label="Save Professional Pathways"
+                        onclick=" event.preventDefault(); event.stopPropagation(); toggleHeart(this)">
+                        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="help-card-img">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&h=450&q=80"
+                        alt="Friendly professional therapist smiling" onerror="this.style.display='none'" />
+                </div>
+                <p>Directory of licensed therapists filtered by cost, language, therapy type, and location.</p>
+            </div>
+        </a>
+
+        </div>
+
+        <!-- Beneath and outside of the card container is the SDG3 context button-->
+        <div class="sdg-wrap">
+            <a href="https://sdgs.un.org/goals/goal3" target="_blank" rel="noopener noreferrer" class="sdg-tag">SDG 3
+                context</a>
+        </div>
+
+    </section>
+
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+                <span class="logo">MindBridge</span>
+                <p>Our vision is to provide convenience and help increase your sales business.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24">
+                            <!-- Commands for drawing the Facebook icon -->
+                            <!-- Similarly for all other icons-->
+                            <path
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>About</h4>
+                <a href="#">How it works</a>
+                <a href="#">Featured</a>
+                <a href="#">Partnership</a>
+                <a href="#">Business Relation</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Community</h4>
+                <a href="#">Events</a>
+                <a href="#">Blog</a>
+                <a href="#">Podcast</a>
+                <a href="#">Invite a friend</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Socials</h4>
+                <a href="#">Discord</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+                <a href="#">Facebook</a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>©2026 MindBridge. All rights reserved.</span>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy &amp; Policy</a>
+                <a href="#">Terms &amp; Condition</a>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="js/scripts.js"></script>
+
+
+</body>
+
+</html>

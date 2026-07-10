@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Therapist Profile – MindBridge</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="styles/styles.css" rel="stylesheet">
+    <link href="styles/therapist-profile.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+</head>
+
+<body>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Therapist Profile – MindBridge</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="styles/styles.css" rel="stylesheet">
+    <link href="styles/therapist-profile.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar" id="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">MindBridge</a>
+
+        <div class="nav-left">
+            <a href="index.html">Home</a>
+            <a href="self-assessment.html">Self-Assessment</a>
+            <a href="resource-library.html">Resource Library</a>
+            <a href="mood-tracker.html">Mood Tracker</a>
+            <a href="find-support.html">Find Support</a>
+            <a href="community-forum.html">Community Forum</a>
+        </div>
+
+        <div class="nav-right">
+            <span class="nav-divider"></span>
+            <a href="register.html" class="register" id="navRegister">Register</a>
+            <a href="login.html" class="login-btn" id="navLogin">Log In</a>
+        </div>
+
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileMenu()">
+            <span class="menu-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M4 7h16" />
+                    <path d="M4 12h16" />
+                    <path d="M4 17h16" />
+                </svg>
+            </span>
+        </button>
+    </div>
+</nav>
+
+<div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div class="mobile-menu-header">
+        <span class="mobile-menu-logo">MindBridge</span>
+        <button class="mobile-close" aria-label="Close menu" onclick="closeMobileMenu()">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M6 6l12 12" />
+                <path d="M18 6L6 18" />
+            </svg>
+        </button>
+    </div>
+    <div style="flex-grow:1;overflow-y:auto">
+        <a href="index.html" class="mobile-link">Home</a>
+        <a href="self-assessment.html" class="mobile-link">Self-Assessment</a>
+        <a href="resource-library.html" class="mobile-link">Resource Library</a>
+        <a href="mood-tracker.html" class="mobile-link">Mood Tracker</a>
+        <a href="find-support.html" class="mobile-link">Find Support</a>
+        <a href="community-forum.html" class="mobile-link">Community Forum</a>
+    </div>
+    <div class="mobile-actions">
+        <a href="register.html" class="register-mobile">Register</a>
+        <a href="login.html" class="btn-primary" style="text-align:center;justify-content:center">Log In</a>
+    </div>
+</div>
+
+<main class="profile-page">
+
+    <a href="find-support.html" class="back-link">← Back to Find Support</a>
+
+    <section class="profile-card">
+        <div class="profile-left">
+            <img id="profileImage" src="" alt="Therapist photo">
+            <div class="profile-status">
+                🟢 Available Today
+            </div>
+        </div>
+
+        <div class="profile-right">
+            <h1 id="profileName">Therapist Name</h1>
+            <p class="profile-role" id="profileRole">Role</p>
+
+            <div class="profile-rating">
+                ⭐⭐⭐⭐⭐ <span id="profileRating">4.9 Reviews</span>
+            </div>
+
+            <p id="profileAbout"></p>
+
+            <div class="profile-info-grid">
+                <div>
+                    <strong>Specialties</strong>
+                    <p id="profileSpecialties"></p>
+                </div>
+                <div>
+                    <strong>Languages</strong>
+                    <p id="profileLanguages"></p>
+                </div>
+                <div>
+                    <strong>Price Range</strong>
+                    <p id="profilePrice"></p>
+                </div>
+                <div>
+                    <strong>Consultation</strong>
+                    <p>Online / In-person</p>
+                </div>
+            </div>
+
+            <button class="book-btn" onclick="bookAppointment()">
+                Book Appointment
+            </button>
+        </div>
+    </section>
+
+    <section class="profile-extra">
+        <div class="extra-card">
+            <h2>Qualifications</h2>
+            <ul id="profileQualifications"></ul>
+        </div>
+        <div class="extra-card">
+            <h2>What They Can Help With</h2>
+            <ul id="profileHelp"></ul>
+        </div>
+    </section>
+
+</main>
+
+<script src="js/scripts.js"></script>
+<script src="js/therapist-profile.js"></script>
+</body>
+</html>
